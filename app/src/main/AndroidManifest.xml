@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hst.osa_lilamore">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".app.AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.OSA"
+        android:usesCleartextTraffic="true">
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <service
+            android:name=".fcm.MyFirebaseMessagingService"
+            android:exported="false"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_logo" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/purple_200" />
+
+
+        <activity android:name=".activity.SplashscreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.WelcomeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.OSA"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/sign"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.EmailLoginActivity"
+            android:label="@string/sign"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin" />
+        <activity
+            android:name=".activity.NumberVerificationActivity"
+            android:label="@string/otp_page"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin" />
+        <activity
+            android:name=".activity.PasswordActivity"
+            android:label="@string/password"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin" />
+        <activity
+            android:name=".activity.ForgotPassword"
+            android:label="@string/reset"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin" />
+        <activity
+            android:name=".activity.SignupActivity"
+            android:label="@string/signUp"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin" />
+        <activity
+            android:name=".activity.CategoryActivity"
+            android:label="@string/category"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.OSA" />
+        <activity
+            android:name=".activity.SubCategoryActivity"
+            android:label="@string/category"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.OSA" />
+        <activity
+            android:name=".activity.ProductDetailActivity"
+            android:label="@string/category"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.OSA" />
+        <activity
+            android:name=".activity.SearchResultActivity"
+            android:label="@string/category"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.OSA" />
+        <activity
+            android:name=".activity.CartActivity"
+            android:label="@string/cart"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.OSA" />
+        <activity
+            android:name=".activity.ShippingAddressActivity"
+            android:label="@string/address"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.OSA" />
+        <activity
+            android:name=".activity.AddAddressActivity"
+            android:label="@string/address"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin" />
+        <activity
+            android:name=".activity.CheckoutActivity"
+            android:label="@string/check_out"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.ReviewOrderActivity"
+            android:label="@string/review_order"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.WalletActivity"
+            android:label="@string/wallet"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.WalletAddMoneyActivity"
+            android:label="@string/wallet"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ccavenue.activity.InitialScreenActivity"
+            android:label="@string/payment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ccavenue.activity.MainActivity"
+            android:label="@string/payment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ccavenue.activity.StatusActivity"
+            android:label="@string/payment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ccavenue.activity.WebViewActivity"
+            android:label="@string/payment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.WishListActivity"
+            android:label="@string/favourite"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.EditProfile"
+            android:label="@string/profile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.NotificationActivity"
+            android:label="@string/notification"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:label="@string/change_password"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/side_menu_settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

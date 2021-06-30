@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activity_toolbar"
+        style="@style/ToolBarStyle.Event"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/gradient_bg"
+        android:minHeight="@dimen/abc_action_bar_default_height_material"
+        android:theme="@style/ThemeOverlay.MyApp.ActionBar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="275dp"
+                android:background="@drawable/gradient_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WelcomeTo Easy Shop Wallet..."
+                    android:textColor="@color/white"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginStart="10dp"
+                    android:textSize="40sp"
+                    android:layout_toLeftOf="@+id/wallet_bg"
+                    android:fontFamily="@font/semibold"/>
+
+                <ImageView
+                    android:id="@+id/wallet_bg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_wallet_bg_img"
+                    android:layout_marginBottom="20dp"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top_corners_round_bg_white"
+                android:layout_marginTop="-20dp">
+
+                <ImageView
+                    android:id="@+id/wallet_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_wallet"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"/>
+
+                <TextView
+                    android:id="@+id/wallet_bal_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wallet_amt"
+                    android:textSize="20sp"
+                    android:layout_below="@+id/wallet_bal"
+                    android:textColor="@color/text_grey_wallet"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/wallet_bal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0000"
+                    android:layout_below="@+id/wallet_img"
+                    android:textSize="26sp"
+                    android:fontFamily="@font/semibold"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/btn_refer"
+                    android:layout_width="180dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/wallet_bal_txt"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/btn_wallet_add_money"
+                    android:drawableStart="@drawable/ic_add_money"
+                    android:drawablePadding="10dp"
+                    android:gravity="top|center_horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingTop="15dp"
+                    android:fontFamily="@font/medium"
+                    android:text="@string/wallet_add"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recent Transaction"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lite_grey"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listView_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="120dp"
+                android:background="@color/white"
+                android:layout_alignParentTop="true"
+                android:layout_above="@+id/cart_layout"
+                android:orientation="horizontal"
+                android:padding="1dp" />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

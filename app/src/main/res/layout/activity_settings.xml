@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SettingsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activity_toolbar"
+        style="@style/ToolBarStyle.Event"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/gradient_bg"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/abc_action_bar_default_height_material"
+        android:theme="@style/ThemeOverlay.MyApp.ActionBar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:id="@+id/changeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgView_1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_password" />
+
+            <TextView
+                android:id="@+id/changePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/imgView_1"
+                android:fontFamily="@font/medium"
+                android:text="@string/change_password"
+                android:textAllCaps="false"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/passClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@id/imgView_1"
+                android:layout_alignBottom="@id/imgView_1"
+                android:layout_alignParentEnd="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_right_black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/setLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/changeLayout">
+
+            <ImageView
+                android:id="@+id/imgView_2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_about_us" />
+
+            <TextView
+                android:id="@+id/aboutUs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/imgView_2"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:text="@string/about"
+                android:textAllCaps="false"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/abtClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@id/imgView_2"
+                android:layout_alignBottom="@id/imgView_2"
+                android:layout_alignParentEnd="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_right_black" />
+
+            <ImageView
+                android:id="@+id/imgView_3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/imgView_2"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_privacy" />
+
+            <TextView
+                android:id="@+id/privacySecurity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgView_2"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/imgView_3"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:text="@string/pri_sec"
+                android:textAllCaps="false"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/privacyClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@id/imgView_3"
+                android:layout_alignBottom="@id/imgView_3"
+                android:layout_alignParentEnd="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_right_black" />
+
+
+            <ImageView
+                android:id="@+id/imgView_4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/imgView_3"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_help_support" />
+
+            <TextView
+                android:id="@+id/helpSupport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgView_3"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/imgView_4"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:text="@string/help"
+                android:textAllCaps="false"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/helpClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@id/imgView_4"
+                android:layout_alignBottom="@id/imgView_4"
+                android:layout_alignParentEnd="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_right_black" />
+
+            <TextView
+                android:id="@+id/recNotify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/helpSupport"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:text="@string/receive_notify"
+                android:textAllCaps="false"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/subNotification"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/recNotify"
+                android:layout_alignBottom="@id/recNotify"
+                android:layout_alignParentEnd="true"
+                android:padding="8dp" />
+
+            <TextView
+                android:id="@+id/rec_News"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_below="@id/recNotify"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:text="@string/receive_notify"
+                android:textAllCaps="false"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/subNews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rec_News"
+                android:layout_alignBottom="@id/rec_News"
+                android:layout_alignParentEnd="true"
+                android:padding="10dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

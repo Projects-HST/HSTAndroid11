@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.NotificationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_notify" />
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_notify"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/semibold"
+            android:text="@string/notify"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/txt"-->
+<!--            android:layout_marginHorizontal="60dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/white_bg_button"-->
+<!--            app:backgroundTint="@color/trans"-->
+<!--            android:fontFamily="@font/regular"-->
+<!--            android:text="@string/notify_return"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:drawableStart=""/>-->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/notify_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/semibold"
+                android:text="@string/app_name"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/new_notify"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="start"
+                    android:fontFamily="@font/semibold"
+                    android:text="@string/app_name"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/clear_new_notify"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:fontFamily="@font/semibold"
+                    android:text="@string/clear"
+                    android:textColor="@color/highlight"/>
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/newNotifyList"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp" >
+
+                <TextView
+                    android:id="@+id/old_notify"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="start"
+                    android:fontFamily="@font/semibold"
+                    android:text="@string/app_name"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/clear_old_notify"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:fontFamily="@font/semibold"
+                    android:text="@string/clear"
+                    android:textColor="@color/highlight"/>
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/oldNotifyList"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

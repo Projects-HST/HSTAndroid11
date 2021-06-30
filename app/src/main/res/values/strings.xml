@@ -1,0 +1,223 @@
+<resources>
+    <string name="app_name">OSA</string>
+    <string name="splashscreen_tagline">Passion for Shop</string>
+    <string name="welcome_start">Get Started</string>
+    <string name="welcome_sign">Let’s sign you in</string>
+
+    <!--    General-->
+    <string name="progress_loading">Loading…</string>
+    <string name="alert_button_ok">OK</string>
+    <string name="alert_button_cancel">Cancel</string>
+    <string name="alert_button_yes">Yes</string>
+    <string name="alert_button_no">No</string>
+    <string name="empty" />
+    <string name="error_no_net">No internet access. Please check your connection and try again.</string>
+    <string name="error_occurred">Failed to connect to the server. Please try again.</string>
+    <string name="error_name">Name is required for registration</string>
+    <string name="error_number">Mobile number is required for sending otp</string>
+    <string name="error_email">Enter a valid Email address</string>
+    <string name="error_password">Enter a valid Password</string>
+    <string name="error_number_min">Mobile number must be 10 digits</string>
+    <string name="error_password_min">Password number must be at least 6 digits</string>
+    <string name="login">Login</string>
+    <string name="skip_login">Skip for now</string>
+    <string name="skip">Skip</string>
+    <string name="login_to_continue">Log in to continue</string>
+
+    <string name="wl_note">Welcome back, you’ve been missed!</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="mobile_number_tag">: \n</string>
+    <string name="email">Use Email ID</string>
+    <string name="signIn">Continue</string>
+    <string name="or">Or</string>
+    <string name="ggLogIn">Continue with Google</string>
+    <string name="fbLogIn">Continue with Facebook</string>
+    <string name="signUp">Sign Up</string>
+    <string name="create">Don’t have an account?</string>
+    <string name="sign">Sign In</string>
+    <string name="phone">Use Phone Number</string>
+    <string name="mail">Email ID</string>
+    <string name="otp_screen">Enter the 4 digit code sent to</string>
+    <string name="otp_note">We\'ve sent a 4 digit code to your phone number. Please enter the verification code.</string>
+    <string name="txt_resend">Didn’t receive the SMS?</string>
+    <string name="resend">Resend</string>
+    <string name="forgot">Forgot password?</string>
+    <string name="password">Password</string>
+    <string name="otp_page">OTP</string>
+    <string name="forgot_note">Forgot your password?</string>
+    <string name="forgot_msg">Enter your email address and we will send you instructions on how to reset your password.</string>
+    <string name="send">Send</string>
+    <string name="create_note">Create your account</string>
+    <string name="create_msg">After your registration is complete, you can see our products.</string>
+    <string name="name">User Name</string>
+    <string name="reset">Reset Password</string>
+    <string name="check_note">Check your email</string>
+    <string name="check_msg">We\'ve sent you instructions on how to reset the password (also check the Spam folder).</string>
+
+    <!-- Facebook -->
+    <string name="facebook_app_id">234269474903261</string>
+    <string name="fb_login_protocol_scheme">fb234269474903261</string>
+
+    <!-- Dashboard -->
+    <string name="search">Search</string>
+    <string name="notification">Notification</string>
+    <string name="cart">Cart</string>
+    <string name="drawer_open">Drawer open</string>
+    <string name="drawer_close">Drawer close</string>
+    <string name="sign_out">Sign out</string>
+    <string name="sign_out_alert">Do you really want to signout?</string>
+    <string name="category">Category</string>
+    <string name="best_selling">Best Selling</string>
+    <string name="new_arrivals">New Arrivals</string>
+    <string name="recently_viewed">Recently Viewed</string>
+    <string name="see_all">See All</string>
+
+
+    <!-- Side Menu -->
+    <string name="side_menu_dash_title">Easy Shop</string>
+    <string name="side_menu_dash">Dashboard</string>
+    <string name="side_menu_profile">Edit Profile</string>
+    <string name="side_menu_category">Category</string>
+    <string name="side_menu_wishlist">Wishlist</string>
+    <string name="side_menu_order">Order History</string>
+    <string name="side_menu_wallet">Wallet</string>
+    <string name="side_menu_address">Shipping Address</string>
+    <string name="side_menu_settings">Settings</string>
+    <string name="side_menu_logout">Logout</string>
+    <string name="notify_return">Return To Homepage</string>
+    <string name="notify">No Notifications Here</string>
+    <string name="clear">Clear all</string>
+
+    <!-- Product Detail -->
+    <string name="detail">Detail</string>
+    <string name="more">View More</string>
+    <string name="color">Colour</string>
+    <string name="size">Size</string>
+    <string name="related">Related</string>
+    <string name="quantity">Quantity</string>
+    <string name="delivery">Delivery</string>
+    <string name="pincode">Enter Pincode</string>
+    <string name="check">Check</string>
+    <string name="in_stock">In Stock</string>
+    <string name="out_stock">Out of Stock</string>
+    <string name="reviews">Reviews</string>
+    <string name="write_reviews">Write your review</string>
+    <string name="price">Price</string>
+    <string name="total">Total</string>
+    <string name="add_cart">Add to Cart</string>
+    <string name="check_out">Check Out</string>
+    <string name="sub_category">ALL</string>
+
+    <!-- Address -->
+    <string name="address">Address List</string>
+    <string name="new_add">Add New</string>
+    <string name="locate">Use my current location</string>
+    <string name="save_address">Save Delivery Address</string>
+    <string name="default_add">Set Default Address</string>
+    <string name="title_location_permission">Location Permission</string>
+    <string name="text_location_permission">Allow app to access your location?</string>
+    <string name="cityName">City</string>
+    <string name="stateName">State</string>
+    <string name="empty_entry">Field cannot be empty</string>
+    <string name="empty_locality">Enter proper locality or pin location on map</string>
+    <string name="empty_address">Click on location to get address</string>
+    <string name="code">Pincode</string>
+    <string name="address1">Address Line1</string>
+    <string name="address2">Address Line 2</string>
+    <string name="btnDelete">Delete</string>
+    <string name="btnEdit">Edit</string>
+    <string name="title_delete">Delete a Address</string>
+    <string name="txt_delete">Are you sure to delete this address</string>
+
+    <!-- Product Checkout -->
+
+    <string name="your_delivery">Your Delivery Address</string>
+    <string name="change_delivery">Change Delivery Address</string>
+    <string name="apply_promo">Apply Promo Code</string>
+    <string name="enter_promo">Enter Promo Code</string>
+    <string name="enter_name">Enter Card Holder Name</string>
+    <string name="enter_card_number">Enter Card Number</string>
+    <string name="enter_month">MM</string>
+    <string name="enter_year">YYYY</string>
+    <string name="enter_cvv">CVV</string>
+    <string name="enter_upi">UPI ID</string>
+    <string name="apply">Apply</string>
+    <string name="verify">Verify</string>
+    <string name="bank_offer">Bank Offer</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="saved_cards">Saved Cards </string>
+    <string name="credit_card">Credit Card</string>
+    <string name="card_number">Card Number</string>
+    <string name="card_name">Name on Card</string>
+    <string name="card_expiry">Expiry date</string>
+    <string name="card_cvv">CVV (Look at the back)</string>
+    <string name="debit_card">Debit Card</string>
+    <string name="upi">UPI</string>
+    <string name="wallet">Wallet</string>
+    <string name="cash">Cash on Delivery</string>
+    <string name="items">Items</string>
+    <string name="offer">Offer</string>
+    <string name="review_order">Review your Order</string>
+    <string name="place_order">Place Order</string>
+
+    <string name="access_code">Access Code</string>
+    <string name="access_code_value">AVAU84GD83BV10UAVB</string>
+    <string name="pay_button">Pay</string>
+    <string name="pay_button_online">Pay Online</string>
+    <string name="pay_button_cash">Pay by Cash</string>
+    <string name="payment">Payment</string>
+    <string name="merchant_id">Merchant Id</string>
+    <string name="merchant_id_value">216134</string>
+    <string name="currency">Currency</string>
+    <string name="amount">Amount</string>
+    <string name="enter_amount">Enter the Amount</string>
+    <string name="redirect_url_advance">https://www.happysanztech.com/shopping/customer_advance.php</string>
+    <string name="redirect_url">https://www.happysanztech.com/shopping/service_net_amount.php</string>
+    <!--    <string name="redirect_url_advance">https://www.skilex.in/ccavenue_app/customer_advance.php</string>-->
+    <!--    <string name="redirect_url">https://www.skilex.in/ccavenue_app/service_net_amount.php</string>-->
+    <string name="cancel_url">Cancel Url</string>
+    <string name="rsa_url">RSA Key Url</string>
+    <string name="rsa_url_value">https://www.happysanztech.com/shopping/ccavenue_app/GetRSA.php</string>
+    <!--    <string name="rsa_url_value">https://www.skilex.in/ccavenue_app/GetRSA.php</string>-->
+
+    <string name="advance_payment">Payment</string>
+    <string name="advance_amount">Advance Amount</string>
+    <string name="status">Payment Status</string>
+    <string name="booking_success">Success!</string>
+    <string name="booking_failed">Sorry!</string>
+    <string name="booking_success_comment">Your booking completed \n successfully</string>
+    <string name="booking_failed_comment">Your booking failed</string>
+    <string name="wallet_amt">Your Wallet Balance</string>
+    <string name="wallet_add">Add Money</string>
+    <string name="enter_wallet_money">₹   Enter Amount</string>
+    <string name="proceed_add_money">Add money to</string>
+    <string name="wallet_success_comment">Money added to wallet \n successfully</string>
+    <string name="wallet_failed_comment">Your transaction failed</string>
+    <string name="points_earned_success">Your amount for points earned is </string>
+    <string name="points_earned_fail">Your transaction failed</string>
+    <string name="points_claim_success">Amount claimed and added to wallet</string>
+    <string name="payment_success">Awesome!</string>
+    <string name="payment_failed">Something\'s wrong!</string>
+    <string name="payment_success_comment">Your service order completed \n successfully</string>
+    <string name="payment_failed_comment">Your service order failed</string>
+    <string name="go_home">Back to Home </string>
+    <string name="try_again">Try Again</string>
+    <string name="failed">Failed</string>
+    <string name="completed">Completed</string>
+    <string name="view_bill">View Bill</string>
+    <string name="update">Update Profile</string>
+    <string name="favourite">Favourites</string>
+    <string name="profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="about">About Us</string>
+    <string name="pri_sec"><![CDATA[Privacy & Security]]></string>
+    <string name="help"><![CDATA[Help & Support]]></string>
+    <string name="receive_notify">Receive Notification</string>
+    <string name="cfm_password">Confirm Password</string>
+    <string name="new_password">New Password</string>
+    <string name="cr_new_password">Your New password must be different from your previous used password</string>
+    <string name="createPassword">Create new password</string>
+    <string name="password_match">Password Match</string>
+    <string name="password_error">Password not Match</string>
+
+</resources>

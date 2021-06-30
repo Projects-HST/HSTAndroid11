@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.NumberVerificationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_bg">
+
+        <RelativeLayout
+            android:id="@+id/toolLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/activity_toolbar"
+                style="@style/ToolBarStyle.Event"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:minHeight="@dimen/abc_action_bar_default_height_material"
+                android:theme="@style/ThemeOverlay.MyApp.ActionBar" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolLayout"
+            android:orientation="vertical"
+            android:background="@drawable/top_corners_round_bg_white">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/otp_note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/semibold"
+                        android:gravity="center"
+                        android:text="@string/otp_screen"
+                        android:textColor="@color/text_black"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/otp_note"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/regular"
+                        android:text=""
+                        android:textColor="@color/highlight"
+                        android:textStyle="bold"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/otp_msg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/number"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/light"
+                        android:gravity="center"
+                        android:text="@string/otp_note"
+                        android:textColor="@color/grey"
+                        android:textSize="14sp" />
+
+                    <com.hst.osa_lilamore.customview.CustomOtpEditText
+                        android:id="@+id/otp_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/otp_msg"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:inputType="number"
+                        android:textColor="@color/text_black"
+                        app:otp="" />
+
+                    <RelativeLayout
+                        android:id="@+id/otpResend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:layout_below="@id/otp_view">
+
+                        <TextView
+                            android:id="@+id/otp_resend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/light"
+                            android:text="@string/txt_resend"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/resend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/otp_resend"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/light"
+                            android:text="@string/resend"
+                            android:textColor="@color/highlight"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/otp_countdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/sendcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_below="@id/otpResend"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/regular"
+                        android:text="@string/sign"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+            </ScrollView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

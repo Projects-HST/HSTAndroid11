@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:showIn="@layout/activity_welcome">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/top_corners_round_bg_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/line_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="false"
+                android:text="Easy Shop"
+                android:gravity="center"
+                android:fontFamily="@font/medium"
+                android:textStyle="bold"
+                android:textSize="31sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/line_two"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+                android:gravity="center"
+                android:fontFamily="@font/medium"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/btn_skip"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:textAllCaps="false"
+                android:background="@drawable/btn_round_white"
+                android:text="@string/welcome_start"
+                android:gravity="center"
+                android:fontFamily="@font/medium"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/color_primary" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
