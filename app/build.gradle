@@ -27,6 +27,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+//    dd
+
     buildTypes {
         release {
             shrinkResources false
