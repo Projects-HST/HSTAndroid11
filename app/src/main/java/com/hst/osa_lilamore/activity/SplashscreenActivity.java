@@ -38,7 +38,7 @@ public class SplashscreenActivity extends AppCompatActivity {
                 Boolean b = PreferenceStorage.isFirstTimeLaunch(getApplicationContext());
                 String id = PreferenceStorage.getUserId(getApplicationContext());
                 if (getStatus != 0 && OSAValidator.checkNullString(id)) {
-                    Intent i = new Intent(SplashscreenActivity.this, MainActivity.class);
+                    Intent i = new Intent(SplashscreenActivity.this, com.hst.osa_lilamore.activity.MainActivity.class);
                     startActivity(i);
                     finish();
                 } else {

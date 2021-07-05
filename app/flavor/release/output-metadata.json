@@ -4,8 +4,8 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.hst.osa",
-  "variantName": "processFlavorReleaseResources",
+  "applicationId": "com.hst.osa_lilamore",
+  "variantName": "flavorRelease",
   "elements": [
     {
       "type": "SINGLE",

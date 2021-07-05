@@ -21,7 +21,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     private ArrayList<Category> categoryArrayList;
     Context context;
-    private CategoryListAdapter.OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView txtCategoryName;
@@ -47,7 +47,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     }
 
 
-    public CategoryListAdapter(ArrayList<Category> CategoryArrayList, CategoryListAdapter.OnItemClickListener onItemClickListener) {
+    public CategoryListAdapter(ArrayList<Category> CategoryArrayList, OnItemClickListener onItemClickListener) {
         this.categoryArrayList = CategoryArrayList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -58,15 +58,15 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
 
     @Override
-    public CategoryListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_category, parent, false);
 
-        return new CategoryListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(CategoryListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Category category = categoryArrayList.get(position);
         holder.txtCategoryName.setText(category.getcategory_name());
 

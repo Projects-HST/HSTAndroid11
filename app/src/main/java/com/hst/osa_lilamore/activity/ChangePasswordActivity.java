@@ -2,9 +2,9 @@ package com.hst.osa_lilamore.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -78,35 +78,26 @@ public class ChangePasswordActivity extends AppCompatActivity implements IServic
 
     private boolean validateFields() {
 
-        cfmPass.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        if (!TextUtils.isEmpty(newPass.getText().toString().trim()) &&
+                (!TextUtils.isEmpty(cfmPass.getText().toString().trim()))){
 
+            if (newPass.getText().toString().trim().equals(cfmPass.getText().toString().trim())){
+                return true;
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                txt1 = newPass.getText().toString().trim();
-                txt2 = cfmPass.getText().toString().trim();
-                if (txt1.equals(txt2)) {
-                    cfmPass.setError(getString(R.string.password_match));
-                } else {
-                    newPass.setError(getString(R.string.password_error));
-                }
+            else {
+                newPass.setError(getString(R.string.password_error));
+                reqFocus(newPass);
+                return false;
             }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        return false;
+        }
+        return true;
     }
 
-//    private void reqFocus(View view) {
-//        if (view.requestFocus()) {
-//            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-//        }
-//    }
+    private void reqFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
 
     private void checkPassword() {
         reStr = "checkPassword";
@@ -129,8 +120,8 @@ public class ChangePasswordActivity extends AppCompatActivity implements IServic
         if (validateFields()) {
             try {
                 jsonObject.put(OSAConstants.KEY_USER_ID, id);
-                jsonObject.put(OSAConstants.PARAMS_PASSWORD, txt1);
-                jsonObject.put(OSAConstants.PARAMS_PASSWORD, txt2);
+                jsonObject.put(OSAConstants.PARAMS_PASSWORD, newPass.getText().toString().trim());
+                jsonObject.put(OSAConstants.PARAMS_PASSWORD, cfmPass.getText().toString().trim());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -172,7 +163,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements IServic
                 changePassword();
             }
             if (reStr.equalsIgnoreCase("changePassword")) {
-                Intent homeInt = new Intent(this, MainActivity.class);
+                Intent homeInt = new Intent(this, com.hst.osa_lilamore.activity.MainActivity.class);
                 homeInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeInt);
                 finish();

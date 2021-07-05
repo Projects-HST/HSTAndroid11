@@ -12,13 +12,13 @@ public class OSAConstants {
     //Payment Gateway
     public static final String API_ADVANCE_PAYMENT_URL = BASE_URL + JOINT_URL + "ccavenue_app/customer_advance.php";
     //    public static final String API_ADVANCE_PAYMENT_URL = BASE_URL + JOINT_URL + "ccavenue_app/ccavResponseHandler.php";
-    public static final String API_PAYMENT_URL = BASE_URL + JOINT_URL + "ccavenue_app/service_net_amount.php";
+    public static final String API_PAYMENT_URL = BASE_URL + JOINT_URL + "ccavenue_app/confirm_order.php";
     public static final String API_WALLET_URL = BASE_URL + JOINT_URL + "ccavenue_app/adding_money_to_wallet.php";
     public static final String API_RSA_URL = BASE_URL + JOINT_URL + "ccavenue_app/GetRSA.php";
     public static final String SUCCESSFUL_PAYMENT = BASE_URL + JOINT_URL + "";
 
 
-    public static final String FB_GPLUS_LOGIN = "socialLogin/";
+    public static final String FB_GPLUS_LOGIN = "social_login/";
 
     public static final String MOBILE_VERIFY = "login_mobile/";
 
@@ -42,6 +42,12 @@ public class OSAConstants {
 
     public static final String GET_PRODUCT_REVIEWS = "product_reviews/";
 
+    public static final String CHECK_REVIEWS = "product_review_check/";
+
+    public static final String SUBMIT_REVIEW = "product_reviews_add/";
+
+    public static final String UPDATE_REVIEW = "review_update/";
+
     public static final String ADD_TO_CART = "product_cart/";
 
     public static final String ADD_TO_WISHLIST = "add_wishlist/";
@@ -61,6 +67,20 @@ public class OSAConstants {
     public static final String ORDER_DETAILS = "order_details/";
 
     public static final String ORDER_HISTORY = "view_orders/";
+
+    public static final String GET_FILTER = "get_filter/";
+
+    public static final String FILTER_RESULT = "filter_result/";
+
+    public static final String RETURN_REASON_LIST = "return_reason_list/";
+
+    public static final String RETURN_REQUEST = "return_order_request/";
+
+    public static final String TRACK_ORDER = "track_order/";
+
+    public static final String TRACK_STATUS = "list_orderstatus/";
+
+    public static final String ORDER_HISTORY_DETAIL = "view_order_cart_details/";
 
     public static final String APPLY_PROMO = "apply_promo_code/";
 
@@ -96,8 +116,14 @@ public class OSAConstants {
 
     public static final String CONFIRM_PASSWORD = "password_update/";
 
-    public static final String NOTIFICATION_HISTORY = "";
+    public static final String NOTIFICATION_HISTORY = "offer_list/";
 
+
+    public static final String USE_WALLET = "use_wallet/";
+
+    public static final String REMOVE_WALLET = "remove_wallet/";
+
+    public static final String PAY_COD = "payby_cod/";
 
     //      SignIn Params
     public static final String PARAMS_USERNAME = "username";
@@ -109,7 +135,6 @@ public class OSAConstants {
     public static final String PARAMS_LOGIN_PORTAL = "login_portal";
     public static final String PARAMS_EMAIL = "email";
     public static final String PARAMS_PASSWORD = "password";
-//    mobile_number,OTP,mob_key,mobile_type,login_type(FB/Gplus/Mobile/Email),login_portal(Web/App)
 
     //      Login mode constants
     public static final int FACEBOOK = 1;
@@ -134,6 +159,15 @@ public class OSAConstants {
     public static String KEY_DOB = "dob";
     public static String KEY_NEWS_STATUS = "newsletter_status";
 
+    //      Review Params
+    public static final String KEY_REVIEW_ID = "review_id";
+    public static final String KEY_COMMENT = "comments";
+    public static String KEY_RATING = "rating";
+
+    //      Replace Params
+    public static final String KEY_QUESTION_ID = "reason_question_id";
+    public static final String KEY_ANSWER = "answer_text";
+
     //      Alert Dialog Constants
     public static String ALERT_DIALOG_TITLE = "alertDialogTitle";
     public static String ALERT_DIALOG_MESSAGE = "alertDialogMessage";
@@ -156,6 +190,10 @@ public class OSAConstants {
     public static String KEY_CAT_ID = "cat_id";
     public static String KEY_SUB_CAT_ID = "sub_cat_id";
     public static String KEY_SEARCH = "search_name";
+    public static String KEY_MIN_PRICE = "min_price_range";
+    public static String KEY_MAX_PRICE = "max_price_range";
+    public static String KEY_PRODUCT_SIZE_ID = "product_size_id";
+    public static String KEY_PRODUCT_COLOUR_ID = "product_colour_id";
 
 
     //    ADDRESS PARAMS
@@ -182,17 +220,19 @@ public class OSAConstants {
 
     //    WALLET PARAMS
     public static String KEY_AMOUNT = "amount";
+    public static String KEY_PROMO = "promo_code";
+
 
     //      SharedPref
     public static final String PARAMS_PROD_ID = "product_id";
     public static final String PARAMS_ADDRESS_ID = "address_id";
     public static final String PARAMS_CART_ID = "cart_id";
     public static final String PARAMS_SIZE_ID = "size_id";
+    public static final String PARAMS_COLOUR_ID = "size_id";
     public static final String PARAMS_COMBINED_ID = "product_comb_id";
     public static final String PARAMS_QUANTITY = "quantity";
     public static final String PARAMS_ORDER_ID = "order_id";
-    public static final String PARAMS_PURCHASE_ORDER_ID = "purchse_order_id";
+    public static final String PARAMS_PURCHASE_ORDER_ID = "purchase_order_id";
 
     public static final String KEY_SOCIAL_NETWORK_URL = "socialNetworkPicUrl";
-
 }

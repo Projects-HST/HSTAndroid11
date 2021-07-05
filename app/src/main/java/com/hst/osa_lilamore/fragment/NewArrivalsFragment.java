@@ -194,6 +194,7 @@ public class NewArrivalsFragment extends Fragment implements IServiceListener, D
         product = productArrayList.get(position);
         Intent intent;
         intent = new Intent(getActivity(), ProductDetailActivity.class);
+        intent.putExtra("page", "new");
         intent.putExtra("productObj", product.getid());
         startActivity(intent);
     }

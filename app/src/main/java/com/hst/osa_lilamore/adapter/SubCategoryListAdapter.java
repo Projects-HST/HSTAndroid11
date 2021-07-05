@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hst.osa_lilamore.R;
@@ -18,8 +19,9 @@ import java.util.ArrayList;
 public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryListAdapter.MyViewHolder> {
 
     private ArrayList<SubCategory> categoryArrayList;
-    Context context;
-    private SubCategoryListAdapter.OnItemClickListener onItemClickListener;
+    Context mContext;
+    private OnItemClickListener onItemClickListener;
+    public static int selected_item = 0;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public LinearLayout txtLayout;
@@ -37,15 +39,12 @@ public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryList
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(v, getAdapterPosition());
             }
-//            else {
-//                onClickListener.onClick(Selecttick);
-//            }
         }
     }
 
-    public SubCategoryListAdapter(ArrayList<SubCategory> CategoryArrayList, SubCategoryListAdapter.OnItemClickListener onItemClickListener) {
+    public SubCategoryListAdapter(Context context, ArrayList<SubCategory> CategoryArrayList, OnItemClickListener onItemClickListener) {
         this.categoryArrayList = CategoryArrayList;
-//        this.context = context;
+        this.mContext = context;
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -55,23 +54,24 @@ public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryList
 
     @NonNull
     @Override
-    public SubCategoryListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_sub_cat, parent, false);
 
-        return new SubCategoryListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubCategoryListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-//        holder.txtLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                holder.txtLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_sel_sub_cat));
-//            }
-//        });
+        if (position == selected_item) {
+            holder.txtLayout.setBackground(ContextCompat.getDrawable(holder.txtLayout.getContext(), R.drawable.btn_sel_sub_cat));
+            holder.txtCategoryName.setTextColor(ContextCompat.getColor(holder.txtCategoryName.getContext(), R.color.white));
+        }
+        else {
+            holder.txtLayout.setBackground(ContextCompat.getDrawable(holder.txtLayout.getContext(), R.drawable.btn_sub_cat));
+            holder.txtCategoryName.setTextColor(ContextCompat.getColor(holder.txtCategoryName.getContext(), R.color.black));
+        }
         SubCategory category = categoryArrayList.get(position);
         holder.txtCategoryName.setText(category.getCategory_name());
     }

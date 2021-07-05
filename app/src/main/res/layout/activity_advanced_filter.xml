@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_bg">
+
+        <RelativeLayout
+            android:id="@+id/toolLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/activity_toolbar"
+                style="@style/ToolBarStyle.Event"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:minHeight="@dimen/abc_action_bar_default_height_material"
+                android:theme="@style/ThemeOverlay.MyApp.ActionBar" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolLayout">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top_corners_round_bg_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/regular"
+                        android:text="@string/txt_sub_category"
+                        android:textColor="@color/text_black"
+                        android:textSize="16sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_cat"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginEnd="10dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/ti_price_range"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtRange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/regular"
+                            android:text="@string/price_range"
+                            android:textColor="@color/text_black"
+                            android:textSize="16sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtRange"
+                            android:background="@color/white"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <com.google.android.material.slider.RangeSlider
+                                android:id="@+id/range"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:stepSize="1.0"
+                                android:valueFrom="0.0"
+                                android:valueTo="10000.0"
+                                app:labelBehavior="floating"
+                                app:values="@array/initial_slider_values" />
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/size_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp">
+
+                        <TextView
+                            android:id="@+id/txt_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="@string/size"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/listView_size"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_size"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:padding="1dp" />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/colours_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp">
+
+                        <TextView
+                            android:id="@+id/txt_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="@string/color"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/listView_colors"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_color"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:padding="1dp" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/result"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/btn_size_color"
+                        android:fontFamily="@font/medium"
+                        android:gravity="center"
+                        android:text="@string/result"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

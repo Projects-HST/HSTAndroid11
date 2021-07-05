@@ -2,12 +2,13 @@ package com.hst.osa_lilamore.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -54,7 +55,7 @@ public class ShippingAddressActivity extends AppCompatActivity implements IServi
     RadioButton radioButton;
     int pos;
     RecyclerView recyclerAddList;
-    private Button add, next;
+    private TextView add, next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +74,10 @@ public class ShippingAddressActivity extends AppCompatActivity implements IServi
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("addressMode"));
 
-        add = (Button) findViewById(R.id.btnAdd);
-        next = (Button) findViewById(R.id.cont);
+        add = (TextView) findViewById(R.id.btnAdd);
+        next = (TextView) findViewById(R.id.cont);
+        add.setOnClickListener(this);
+        next.setOnClickListener(this);
         recyclerAddList = (RecyclerView) findViewById(R.id.addList);
 
         add.setOnClickListener(this);
@@ -212,12 +215,32 @@ public class ShippingAddressActivity extends AppCompatActivity implements IServi
     public void onClick(View v) {
 
         if (v == add) {
-            Intent addInt = new Intent(this, AddAddressActivity.class);
-            startActivity(addInt);
-        }
+            if (PreferenceStorage.getUserId(this).isEmpty()) {
+                if (PreferenceStorage.getUserId(this).equalsIgnoreCase("")) {
+                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+                    alertDialogBuilder.setTitle(R.string.login);
+                    alertDialogBuilder.setMessage(R.string.login_to_continue);
+                    alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                        }
+                    });
+                    alertDialogBuilder.setNegativeButton(R.string.alert_button_cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialogBuilder.show();
+                } else {
+                    Intent addInt = new Intent(this, com.hst.osa_lilamore.activity.AddAddressActivity.class);
+                    startActivity(addInt);
+                }
+            }
 
-        if (v == next) {
-            setDefaultAddress();
+            if (v == next) {
+                setDefaultAddress();
+            }
         }
     }
 

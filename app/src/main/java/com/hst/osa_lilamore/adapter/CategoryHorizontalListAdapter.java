@@ -58,15 +58,15 @@ public class CategoryHorizontalListAdapter extends RecyclerView.Adapter<Category
 
 
     @Override
-    public CategoryHorizontalListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_horizontal_category, parent, false);
 
-        return new CategoryHorizontalListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(CategoryHorizontalListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Category category = categoryArrayList.get(position);
         holder.txtCategoryName.setText(category.getcategory_name());
 

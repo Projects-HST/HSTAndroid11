@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OSA</string>
+    <string name="app_name">Little Amore</string>
     <string name="splashscreen_tagline">Passion for Shop</string>
     <string name="welcome_start">Get Started</string>
     <string name="welcome_sign">Let’s sign you in</string>
@@ -90,7 +90,7 @@
 
     <!-- Product Detail -->
     <string name="detail">Detail</string>
-    <string name="more">View More</string>
+    <string name="more">Read More</string>
     <string name="color">Colour</string>
     <string name="size">Size</string>
     <string name="related">Related</string>
@@ -102,11 +102,15 @@
     <string name="out_stock">Out of Stock</string>
     <string name="reviews">Reviews</string>
     <string name="write_reviews">Write your review</string>
+    <string name="comment">Tell us your experience</string>
     <string name="price">Price</string>
     <string name="total">Total</string>
     <string name="add_cart">Add to Cart</string>
     <string name="check_out">Check Out</string>
     <string name="sub_category">ALL</string>
+    <string name="txt_sub_category">Sub Category</string>
+    <string name="price_range">Select a price range</string>
+    <string name="result">Result</string>
 
     <!-- Address -->
     <string name="address">Address List</string>
@@ -145,6 +149,8 @@
     <string name="verify">Verify</string>
     <string name="bank_offer">Bank Offer</string>
     <string name="payment_method">Payment Method</string>
+    <string name="order_details">Order Details</string>
+    <string name="payment_information">Payment Information</string>
     <string name="saved_cards">Saved Cards </string>
     <string name="credit_card">Credit Card</string>
     <string name="card_number">Card Number</string>
@@ -159,6 +165,20 @@
     <string name="offer">Offer</string>
     <string name="review_order">Review your Order</string>
     <string name="place_order">Place Order</string>
+    <string name="submit">Submit</string>
+    <string name="track_order">Track Order</string>
+    <string name="order_placed">Order Placed</string>
+    <string name="order_id">Order ID</string>
+    <string name="order_date">Order Date</string>
+    <string name="order_total">Order Total</string>
+    <string name="order_placed_success">Your order was placed successfully. You can see the status of the order at any time.</string>
+    <string name="continue_shopping">Continue Shopping</string>
+    <string name="go_orders">Go to Orders</string>
+    <string name="orders">Orders</string>
+    <string name="order_history">Order History</string>
+    <string name="delivered">Delivered</string>
+    <string name="in_transit">In Transit</string>
+    <string name="replacement">Return or Replace</string>
 
     <string name="access_code">Access Code</string>
     <string name="access_code_value">AVAU84GD83BV10UAVB</string>
@@ -219,5 +239,7 @@
     <string name="createPassword">Create new password</string>
     <string name="password_match">Password Match</string>
     <string name="password_error">Password not Match</string>
+    <string name="new_notify">New Notification</string>
+    <string name="receive_news">Receivee Newsletter</string>
 
 </resources>

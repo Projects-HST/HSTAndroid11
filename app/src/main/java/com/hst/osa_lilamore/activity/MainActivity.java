@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -124,10 +125,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initializeIDs() {
 
-        recentSearchLay = (LinearLayout)findViewById(R.id.recentMainLay);
-        mainLay = (FrameLayout)findViewById(R.id.fragmentContainer);
-        recentSearchList = (RecyclerView)findViewById(R.id.recentSearchMain);
-        mSearchView = (SearchView)findViewById(R.id.search_main);
+        recentSearchLay = (LinearLayout) findViewById(R.id.recentMainLay);
+        mainLay = (FrameLayout) findViewById(R.id.fragmentContainer);
+        recentSearchList = (RecyclerView) findViewById(R.id.recentSearchMain);
+        mSearchView = (SearchView) findViewById(R.id.search_main);
         navigationView = findViewById(R.id.nav_view);
         profilePic = navigationView.getHeaderView(0).findViewById(R.id.user_img);
         name = navigationView.getHeaderView(0).findViewById(R.id.full_name);
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                if (query != null){
+                if (query != null) {
                     makeSearch(query);
                 }
                 return false;
@@ -178,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        if(PreferenceStorage.getName(this).equalsIgnoreCase("") || PreferenceStorage.getName(this).isEmpty()) {
+        if (PreferenceStorage.getName(this).equalsIgnoreCase("") || PreferenceStorage.getName(this).isEmpty()) {
             name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -193,8 +194,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mailId.setText(PreferenceStorage.getEmail(this));
         }
 
-        if (OSAValidator.checkNullString(PreferenceStorage.getProfilePic(this))&&(!PreferenceStorage.getProfilePic(this).isEmpty())) {
+        if (PreferenceStorage.getFullName(this).equalsIgnoreCase("") || PreferenceStorage.getFullName(this).isEmpty()) {
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //What to do on back clicked
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                    i.putExtra("page", "dash");
+                    startActivity(i);
+                }
+            });
+        } else {
+            name.setText(PreferenceStorage.getFullName(this));
+            mailId.setText(PreferenceStorage.getEmail(this));
+        }
+//        String profileImg = PreferenceStorage.getProfilePic()
+        if (OSAValidator.checkNullString(PreferenceStorage.getProfilePic(this)) && (!PreferenceStorage.getProfilePic(this).isEmpty())) {
             Picasso.get().load(PreferenceStorage.getProfilePic(this)).into(profilePic);
+        } else {
+            profilePic.setImageResource(R.drawable.ic_profile);
+        }
+
+        if (OSAValidator.checkNullString(PreferenceStorage.getSocialNetworkProfileUrl(this)) &&
+                (!PreferenceStorage.getSocialNetworkProfileUrl(this).isEmpty())) {
+            Picasso.get().load(PreferenceStorage.getSocialNetworkProfileUrl(this)).into(profilePic);
         } else {
             profilePic.setImageResource(R.drawable.ic_profile);
         }
@@ -263,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void logout() {
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(new ContextThemeWrapper(this, R.style.alertDialogueTheme));
         alertDialogBuilder.setTitle(getString(R.string.sign_out));
         alertDialogBuilder.setMessage(getString(R.string.sign_out_alert));
         alertDialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
@@ -372,36 +395,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == sideDash) {
             changePage(0);
-        }if (view == sideProfile) {
-            Intent i = new Intent(this, EditProfile.class);
+        }
+        if (view == sideProfile) {
+            Intent i = new Intent(this, com.hst.osa_lilamore.activity.EditProfile.class);
 //            i.putExtra("page", "editProfile");
             startActivity(i);
-        }if (view == sideCat) {
-            Intent i = new Intent(this, CategoryActivity.class);
+        }
+        if (view == sideCat) {
+            Intent i = new Intent(this, com.hst.osa_lilamore.activity.CategoryActivity.class);
             startActivity(i);
 //            changePage(1);
-        }if (view == sideWish){
-            Intent i = new Intent(this, WishListActivity.class);
+        }
+        if (view == sideWish) {
+            Intent i = new Intent(this, com.hst.osa_lilamore.activity.WishListActivity.class);
             startActivity(i);
-        }if (view == sideOrder) {
-
-        }if (view == sideWallet) {
-            Intent i = new Intent(this, WalletActivity.class);
+        }
+        if (view == sideOrder) {
+            Intent i = new Intent(this, com.hst.osa_lilamore.activity.OrderHistoryActivity.class);
             startActivity(i);
-        }if (view == sideAddress) {
-            Intent i = new Intent(this, ShippingAddressActivity.class);
+        }
+        if (view == sideWallet) {
+            Intent i = new Intent(this, com.hst.osa_lilamore.activity.WalletActivity.class);
+            startActivity(i);
+        }
+        if (view == sideAddress) {
+            Intent i = new Intent(this, com.hst.osa_lilamore.activity.ShippingAddressActivity.class);
             i.putExtra("page", "shippingAddress");
             startActivity(i);
 
-        }if (view == sideSettings) {
-            Intent i = new Intent(this, SettingsActivity.class);
+        }
+        if (view == sideSettings) {
+            Intent i = new Intent(this, com.hst.osa_lilamore.activity.SettingsActivity.class);
             startActivity(i);
-        }if (view == sideLogout) {
+        }
+        if (view == sideLogout) {
             logout();
         }
     }
 
-    private void makeSearch(String searchName){
+    private void makeSearch(String searchName) {
 
         serviceCall = "search";
 
@@ -417,7 +449,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
     }
 
-    private void getRecentSearch(){
+    private void getRecentSearch() {
 
 //        recentSearchLay.setVisibility(View.VISIBLE);
         serviceCall = "recentSearch";
@@ -484,13 +516,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    recyclerViewPopularProduct.setLayoutManager(mLayoutManager);
 //                    recyclerViewPopularProduct.setAdapter(adasd);
 
-                    Intent intentSearch = new Intent(this, SearchResultActivity.class);
+                    Intent intentSearch = new Intent(this, com.hst.osa_lilamore.activity.SearchResultActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("searchObj", productArrayList);
                     intentSearch.putExtras(bundle);
                     startActivity(intentSearch);
                 }
-                if(serviceCall.equalsIgnoreCase("recentSearch")){
+                if (serviceCall.equalsIgnoreCase("recentSearch")) {
                     Gson gson = new Gson();
                     searchList = gson.fromJson(response.toString(), RecentSearchList.class);
                     recentSearchArrayList.addAll(searchList.getRecentSearchArrayList());

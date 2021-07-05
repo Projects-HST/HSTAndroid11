@@ -19,12 +19,12 @@
         <RelativeLayout
             android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="40dp"
             android:background="@color/background_grey">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="20dp"
                 android:background="@drawable/gradient_bg" />
 
             <androidx.appcompat.widget.SearchView
@@ -60,8 +60,8 @@
         android:id="@+id/catLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:visibility="visible">
 
     <androidx.recyclerview.widget.RecyclerView

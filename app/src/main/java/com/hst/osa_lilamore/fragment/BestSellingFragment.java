@@ -183,6 +183,7 @@ public class BestSellingFragment extends Fragment implements IServiceListener, D
         product = productArrayList.get(position);
         Intent intent;
         intent = new Intent(getActivity(), ProductDetailActivity.class);
+        intent.putExtra("page", "best");
         intent.putExtra("productObj", product.getid());
         startActivity(intent);
     }

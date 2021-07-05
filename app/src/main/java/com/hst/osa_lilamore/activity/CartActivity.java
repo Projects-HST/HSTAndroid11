@@ -95,8 +95,11 @@ public class CartActivity extends AppCompatActivity implements IServiceListener,
     @Override
     public void onClick(View v) {
         if (v == btnCheckout) {
-            Intent i = new Intent(this, CheckoutActivity.class);
-            startActivity(i);
+            if (cartItemArrayList.size() > 0) {
+                Intent i = new Intent(this, CheckoutActivity.class);
+                startActivity(i);
+                finish();
+            }
         }
     }
 

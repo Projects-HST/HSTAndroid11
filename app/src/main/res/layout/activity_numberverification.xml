@@ -54,7 +54,7 @@
                         android:gravity="center"
                         android:text="@string/otp_screen"
                         android:textColor="@color/text_black"
-                        android:textSize="22sp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/number"
@@ -63,7 +63,7 @@
                         android:layout_below="@id/otp_note"
                         android:gravity="center"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/regular"
+                        android:fontFamily="@font/semibold"
                         android:text=""
                         android:textColor="@color/highlight"
                         android:textStyle="bold"
@@ -76,7 +76,7 @@
                         android:layout_below="@id/number"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/light"
+                        android:fontFamily="@font/regular"
                         android:gravity="center"
                         android:text="@string/otp_note"
                         android:textColor="@color/grey"
@@ -117,9 +117,11 @@
                             android:layout_height="wrap_content"
                             android:layout_toEndOf="@id/otp_resend"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/light"
+                            android:fontFamily="@font/semibold"
                             android:text="@string/resend"
-                            android:textColor="@color/highlight"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:textColor="@color/grey"
                             android:textSize="14sp" />
 
                         <TextView
@@ -139,7 +141,7 @@
                         android:text="@string/sign"
                         android:textAllCaps="false"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="18sp" />
 
                 </RelativeLayout>

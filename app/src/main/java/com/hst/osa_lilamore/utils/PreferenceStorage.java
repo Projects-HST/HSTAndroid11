@@ -339,4 +339,22 @@ public class PreferenceStorage {
     }
     /*End*/
 
+    /*To store order id*/
+    public static void saveProductId(Context context, String orderId) {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(OSAConstants.PARAMS_PROD_ID, orderId);
+        editor.apply();
+    }
+
+    public static String getProductId(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        String orderId;
+        orderId = sharedPreferences.getString(OSAConstants.PARAMS_PROD_ID, "");
+        return orderId;
+    }
+    /*End*/
+
 }

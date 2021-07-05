@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +43,7 @@ import static android.util.Log.d;
 
 public class SubCategoryActivity extends AppCompatActivity implements IServiceListener, SubCategoryListAdapter.OnItemClickListener, DialogClickListener, BestSellingListAdapter.OnItemClickListener, RecentSearchListAdapter.OnItemClickListener {
 
-    private static final String TAG = MainActivity.class.getName();
+    private static final String TAG = com.hst.osa_lilamore.activity.MainActivity.class.getName();
     private ServiceHelper serviceHelper;
     private ProgressDialogHelper progressDialogHelper;
 
@@ -63,6 +64,8 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
     private SearchView mSearchView;
 
     private String catId, subCatId, serviceCall;
+
+    private ImageView imgFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +140,17 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
 
         catId = getIntent().getStringExtra("categoryObj");
 
+
+        imgFilter = (ImageView) findViewById(R.id.img_filter);
+        imgFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.AdvancedFilterActivity.class);
+                i.putExtra("categoryObj", catId);
+                startActivity(i);
+            }
+        });
+
         showSubCategory();
     }
 
@@ -203,8 +217,9 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
                         txtSubCat = subCategoryArray.getJSONObject(i).getString("category_name");
                         subCategoryArrayList.add(new SubCategory(id, txtSubCat));
                     }
-                    mAdapter = new SubCategoryListAdapter(subCategoryArrayList, this);
+                    mAdapter = new SubCategoryListAdapter(this, subCategoryArrayList, this);
                     recyclerViewSubCategory.setAdapter(mAdapter);
+                    subCatProductList();
                 }
                 if (serviceCall.equalsIgnoreCase("sub_cat_product_list")) {
                     Gson gson = new Gson();
@@ -231,7 +246,7 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
                     productList = gson.fromJson(response.toString(), SubProductList.class);
                     productArrayList.addAll(productList.getProductArrayList());
 
-                    Intent intentSearch = new Intent(this, SearchResultActivity.class);
+                    Intent intentSearch = new Intent(this, com.hst.osa_lilamore.activity.SearchResultActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("searchObj", productArrayList);
                     intentSearch.putExtras(bundle);
@@ -269,6 +284,8 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
 //        } else {
 //            category = subCategoryArrayList.get(position);
 //        }
+        SubCategoryListAdapter.selected_item = position;
+        recyclerViewSubCategory.getAdapter().notifyDataSetChanged();
         category = subCategoryArrayList.get(position);
         subCatId = category.getId();
         productArrayList.clear();
@@ -328,6 +345,12 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
     @Override
     public void onItemClickBestSelling(View view, int position) {
 
+        Product product = null;
+        product = productArrayList.get(position);
+        Intent detailInt = new Intent(this, com.hst.osa_lilamore.activity.ProductDetailActivity.class);
+        detailInt.putExtra("page", "subcat");
+        detailInt.putExtra("productObj", product.getid());
+        startActivity(detailInt);
     }
 
     @Override

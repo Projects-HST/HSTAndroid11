@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.bean.support.Colour;
+import com.hst.osa_lilamore.bean.support.Size;
 
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ public class ColourListAdapter extends RecyclerView.Adapter<ColourListAdapter.My
     }
 
 
-    public ColourListAdapter(ArrayList<Colour> colourArrayList1, ColourListAdapter.OnItemClickListener onItemClickListener) {
+    public ColourListAdapter(ArrayList<Colour> colourArrayList1, OnItemClickListener onItemClickListener) {
         this.colourArrayList = colourArrayList1;
         this.onItemClickListener = onItemClickListener;
     }
@@ -60,15 +62,15 @@ public class ColourListAdapter extends RecyclerView.Adapter<ColourListAdapter.My
 
 
     @Override
-    public ColourListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_colour, parent, false);
 
-        return new ColourListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ColourListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Colour colour = colourArrayList.get(position);
         holder.txtSizeName.setText(colour.getcolor_name());
 //        holder.colourLay.setBackgroundColor(Color.parseColor(colour.getcolor_code()));

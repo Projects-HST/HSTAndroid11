@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:showIn="@layout/activity_welcome">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/get_started_bg"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -23,25 +27,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textAllCaps="false"
-                android:text="Easy Shop"
+                android:fontFamily="@font/bold"
                 android:gravity="center"
-                android:fontFamily="@font/medium"
-                android:textStyle="bold"
-                android:textSize="31sp"
-                android:textColor="@color/white" />
+                android:text="@string/app_name"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="31sp" />
 
             <TextView
                 android:id="@+id/line_two"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textAllCaps="false"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+                android:fontFamily="@font/regular"
                 android:gravity="center"
-                android:fontFamily="@font/medium"
-                android:textSize="14sp"
-                android:textColor="@color/white" />
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/btn_skip"
@@ -49,14 +52,13 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:textAllCaps="false"
                 android:background="@drawable/btn_round_white"
-                android:text="@string/welcome_start"
+                android:fontFamily="@font/semibold"
                 android:gravity="center"
-                android:fontFamily="@font/medium"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="@color/color_primary" />
+                android:text="@string/welcome_start"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
         </LinearLayout>
 

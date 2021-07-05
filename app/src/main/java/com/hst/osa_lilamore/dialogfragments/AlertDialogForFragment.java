@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.interfaces.DialogClickListener;
@@ -51,7 +52,7 @@ public class AlertDialogForFragment extends DialogFragment {
         int title = args.getInt(OSAConstants.ALERT_DIALOG_TITLE);
         tag = args.getInt(OSAConstants.ALERT_DIALOG_TAG, 0);
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.alertDialogueTheme))
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(false)

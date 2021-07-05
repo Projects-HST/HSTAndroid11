@@ -12,7 +12,7 @@ public class ReviewList {
     private int count;
     @SerializedName("product_review")
     @Expose
-    private ArrayList<Review> reviewArrayList = new ArrayList<>();
+    private ArrayList<com.hst.osa_lilamore.bean.support.Review> reviewArrayList = new ArrayList<>();
 
     /**
      * @return The count
@@ -31,14 +31,14 @@ public class ReviewList {
     /**
      * @return The reviewArrayList
      */
-    public ArrayList<Review> getReviewArrayList() {
+    public ArrayList<com.hst.osa_lilamore.bean.support.Review> getReviewArrayList() {
         return reviewArrayList;
     }
 
     /**
      * @param reviewArrayList The reviewArrayList
      */
-    public void setReviewArrayList(ArrayList<Review> reviewArrayList) {
+    public void setReviewArrayList(ArrayList<com.hst.osa_lilamore.bean.support.Review> reviewArrayList) {
         this.reviewArrayList = reviewArrayList;
     }
 }

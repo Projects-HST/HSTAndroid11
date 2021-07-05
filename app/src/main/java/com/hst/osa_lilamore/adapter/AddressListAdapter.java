@@ -39,7 +39,6 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private ServiceHelper serviceHelper;
     private ProgressDialogHelper progressDialogHelper;
     private OnItemClickListener onItemClickListener;
-    int itemCheckedPosition = -1;
 
     @Override
     public void onResponse(JSONObject response) {
@@ -166,19 +165,19 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
         }
 
-        private void setDefaultAddress() {
-
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put(OSAConstants.KEY_USER_ID, "3");
-                jsonObject.put(OSAConstants.KEY_ADDRESS_ID, addressId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String url = OSAConstants.BUILD_URL + OSAConstants.DEFAULT_ADDRESS;
-            serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
-        }
+//        private void setDefaultAddress() {
+//
+//            JSONObject jsonObject = new JSONObject();
+//            try {
+//                jsonObject.put(OSAConstants.KEY_USER_ID, "3");
+//                jsonObject.put(OSAConstants.KEY_ADDRESS_ID, addressId);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            String url = OSAConstants.BUILD_URL + OSAConstants.DEFAULT_ADDRESS;
+//            serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
+//        }
     }
 
     public AddressListAdapter(Context context, ArrayList<AddressList> addressArrayList, OnItemClickListener onItemClickListener) {

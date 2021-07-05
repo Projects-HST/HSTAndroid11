@@ -11,9 +11,12 @@
         android:id="@+id/txt_sub_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:fontFamily="@font/regular"
-        android:textColor="@color/text_sub_cat"
+        android:textColor="@color/black"
         android:text="@string/sub_category" />
 
 </LinearLayout>

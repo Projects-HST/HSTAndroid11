@@ -70,12 +70,17 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
 
     private RelativeLayout sizeLayout, colourLayout, reviewLayout;
     public RatingBar productRating;
-    public TextView productName, productPrice, productShare, productQuantity, productStockStatus;
+    public TextView productName, productReviewName, productPrice, productShare, productQuantity, productStockStatus;
     public ImageView btnPlus, btnMinus;
     public EditText deliverCode;
     public TextView checkCode;
-    public TextView productDetail, viewMore, productReviews;
+    public TextView productDetail, viewMore, productReviews, submitBtn;
     public TextView totalPrice, addCart;
+
+    private RatingBar rtbComments;
+    private EditText edtComments;
+    private String reviewID = "", prdName = "";
+    private RelativeLayout originalLayout, orderPlacedLayout;
 
     private ArrayList<Size> sizeArrayList = new ArrayList<>();
     private SizeListAdapter mAdapter;
@@ -100,10 +105,12 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
 
     ImageView imgLike;
     boolean likeClick = false;
+    private boolean newReview = true;
 
-    String resFor = "";
+    String resFor = "", offPer = "", offStatus = "";
     float currentPrice = 0;
     int stockCount = 0;
+    String page = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,12 +118,40 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
         setContentView(R.layout.activity_product_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_toolbar);
         setSupportActionBar(toolbar);
+        page = getIntent().getExtras().getString("page");
         findViewById(R.id.img_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (page.equalsIgnoreCase("product")) {
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    i.putExtra("page", "product");
+                    startActivity(i);
+                }
                 finish();
             }
         });
+        findViewById(R.id.txt_write_review).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkLogin()) {
+                    layoutVisible();
+                }
+            }
+        });
+        findViewById(R.id.click_detect).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutVisible();
+            }
+        });
+
+        productReviewName = findViewById(R.id.product_name_review);
+        rtbComments = findViewById(R.id.rating_bar);
+        edtComments = findViewById(R.id.edtComments);
+        submitBtn = (TextView) findViewById(R.id.submit_review);
+        submitBtn.setOnClickListener(this);
+        originalLayout = (RelativeLayout) findViewById(R.id.original_layout);
+        orderPlacedLayout = (RelativeLayout) findViewById(R.id.order_played_layout);
 
         productID = getIntent().getStringExtra("productObj");
         aViewFlipper = findViewById(R.id.view_flipper);
@@ -200,11 +235,9 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
     }
 
     public void initiateServices() {
-
         serviceHelper = new ServiceHelper(this);
         serviceHelper.setServiceListener(this);
         progressDialogHelper = new ProgressDialogHelper(this);
-
     }
 
     private boolean validateSignInResponse(JSONObject response) {
@@ -245,12 +278,24 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
                     setImageInFlipr(imgUrl.get(0));
                     productName.setText(productDetails.getString("product_name"));
                     productDetail.setText(productDetails.getString("product_description"));
-                    productPrice.setText("Rs." + productDetails.getString("prod_actual_price"));
-                    currentPrice = Float.parseFloat(productDetails.getString("prod_actual_price"));
+                    offStatus = productDetails.getString("offer_status");
+                    offPer = productDetails.getString("offer_percentage");
                     stockCount = Integer.parseInt(productDetails.getString("stocks_left"));
                     if (stockCount == 0) {
                         productStockStatus.setText(getString(R.string.out_stock));
                         productStockStatus.setTextColor(ContextCompat.getColor(this, R.color.out_of_stock));
+                    }
+                    if (offStatus.equalsIgnoreCase("0")) {
+                        productPrice.setText("Rs." + productDetails.getString("prod_actual_price"));
+                        currentPrice = Float.parseFloat(productDetails.getString("prod_actual_price"));
+                    } else {
+                        String offPrice = productDetails.getString("prod_actual_price");
+                        double offer = Double.parseDouble(offPer);
+                        double offCal = Double.parseDouble(offPrice);
+                        double actualAmt = (offCal / 100.0f) * offer;
+                        double amount = (offCal - actualAmt);
+                        productPrice.setText("Rs." + amount);
+                        currentPrice = Float.parseFloat(String.valueOf(amount));
                     }
                     calculatePrice(1);
 
@@ -304,8 +349,18 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
                     LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
                     recyclerViewColour.setLayoutManager(layoutManager);
                     recyclerViewColour.setAdapter(adapter);
-                    productPrice.setText("Rs." + colourArrayList.get(0).getProd_actual_price());
-                    currentPrice = Float.parseFloat(colourArrayList.get(0).getProd_actual_price());
+                    if (offStatus.equalsIgnoreCase("1")) {
+                        String offPrice = colourArrayList.get(0).getProd_actual_price();
+                        double offer = Double.parseDouble(offPer);
+                        double offCal = Double.parseDouble(offPrice);
+                        double actualAmt = (offCal / 100.0f) * offer;
+                        double amount = (offCal - actualAmt);
+                        productPrice.setText("Rs." + amount);
+                        currentPrice = Float.parseFloat(String.valueOf(amount));
+                    } else {
+                        productPrice.setText("Rs." + colourArrayList.get(0).getProd_actual_price());
+                        currentPrice = Float.parseFloat(colourArrayList.get(0).getProd_actual_price());
+                    }
                     colourID = colourArrayList.get(0).getid();
                     stockCount = Integer.parseInt(colourArrayList.get(0).getstocks_left());
                     calculatePrice(Integer.parseInt(productQuantity.getText().toString()));
@@ -329,6 +384,25 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
                 } else if (resFor.equalsIgnoreCase("removeCart")) {
                     likeClick = false;
                     imgLike.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_heart));
+                }
+                if (resFor.equalsIgnoreCase("check")) {
+                    if (response.getString("msg").equalsIgnoreCase("Reviews found")) {
+                        newReview = false;
+                        JSONObject data = response.getJSONObject("product_review");
+                        reviewID = data.getString("id");
+                        String rating = data.getString("rating");
+                        String comment = data.getString("comment");
+                        rtbComments.setRating(Integer.getInteger(rating));
+                        edtComments.setText(comment);
+                    } else {
+                        newReview = true;
+                    }
+                }
+                if (resFor.equalsIgnoreCase("sumbit")) {
+                    layoutGone();
+                }
+                if (resFor.equalsIgnoreCase("update")) {
+                    layoutGone();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -453,6 +527,56 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
         serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
     }
 
+    private void checkReview() {
+        resFor = "check";
+        JSONObject jsonObject = new JSONObject();
+        String id = PreferenceStorage.getUserId(this);
+        String pid = PreferenceStorage.getProductId(this);
+        try {
+            jsonObject.put(OSAConstants.KEY_USER_ID, id);
+            jsonObject.put(OSAConstants.PARAMS_PROD_ID, pid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url = OSAConstants.BUILD_URL + OSAConstants.CHECK_REVIEWS;
+        serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
+    }
+
+    private void submitReview() {
+        resFor = "sumbit";
+        JSONObject jsonObject = new JSONObject();
+        String id = PreferenceStorage.getUserId(this);
+        String oid = PreferenceStorage.getOrderId(this);
+        try {
+            jsonObject.put(OSAConstants.KEY_USER_ID, id);
+            jsonObject.put(OSAConstants.PARAMS_PROD_ID, oid);
+            jsonObject.put(OSAConstants.KEY_COMMENT, edtComments.getText().toString());
+            jsonObject.put(OSAConstants.KEY_RATING, "" + Integer.getInteger(String.valueOf(rtbComments.getRating())));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url = OSAConstants.BUILD_URL + OSAConstants.SUBMIT_REVIEW;
+        serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
+    }
+
+    private void updateReview() {
+        resFor = "update";
+        JSONObject jsonObject = new JSONObject();
+        String id = PreferenceStorage.getUserId(this);
+        String oid = PreferenceStorage.getProductId(this);
+        try {
+            jsonObject.put(OSAConstants.KEY_USER_ID, id);
+            jsonObject.put(OSAConstants.PARAMS_PROD_ID, oid);
+            jsonObject.put(OSAConstants.KEY_REVIEW_ID, reviewID);
+            jsonObject.put(OSAConstants.KEY_COMMENT, edtComments.getText().toString());
+            jsonObject.put(OSAConstants.KEY_RATING, "" + rtbComments.getRating());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url = OSAConstants.BUILD_URL + OSAConstants.UPDATE_REVIEW;
+        serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
+    }
+
     @Override
     public void onItemClickSize(View view, int position) {
         Size size = null;
@@ -469,8 +593,19 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
         colour = colourArrayList.get(position);
         ColourListAdapter.selected_item = position;
         recyclerViewColour.getAdapter().notifyDataSetChanged();
-        productPrice.setText("Rs." + colour.getProd_actual_price());
-        currentPrice = Float.parseFloat(colour.getProd_actual_price());
+        if (offStatus.equalsIgnoreCase("1")) {
+            String offPrice = colour.getProd_actual_price();
+            double offer = Double.parseDouble(offPer);
+            double offCal = Double.parseDouble(offPrice);
+            double actualAmt = (offCal / 100.0f) * offer;
+            double amount = (offCal - actualAmt);
+            productPrice.setText("Rs." + amount);
+            currentPrice = Float.parseFloat(String.valueOf(amount));
+        }
+        else {
+            productPrice.setText("Rs." + colour.getProd_actual_price());
+            currentPrice = Float.parseFloat(colour.getProd_actual_price());
+        }
         colourID = colour.getid();
         calculatePrice(Integer.parseInt(productQuantity.getText().toString()));
     }
@@ -566,6 +701,50 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
                 }
             }
         }
+        if (view == submitBtn) {
+            if (newReview) {
+                submitReview();
+            } else {
+                updateReview();
+            }
+        }
+    }
+
+    public void layoutVisible() {
+        checkReview();
+        orderPlacedLayout.setVisibility(View.VISIBLE);
+        originalLayout.setClickable(false);
+        originalLayout.setFocusable(false);
+    }
+
+    public boolean checkLogin() {
+        if (PreferenceStorage.getUserId(this).equalsIgnoreCase("") || PreferenceStorage.getUserId(this).isEmpty()) {
+            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle(R.string.login);
+            alertDialogBuilder.setMessage(R.string.login_to_continue);
+            alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface arg0, int arg1) {
+                    doLogout();
+                }
+            });
+            alertDialogBuilder.setNegativeButton(R.string.alert_button_cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alertDialogBuilder.show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void layoutGone() {
+        orderPlacedLayout.setVisibility(View.GONE);
+        originalLayout.setClickable(true);
+        originalLayout.setFocusable(true);
     }
 
     private void doLogout() {

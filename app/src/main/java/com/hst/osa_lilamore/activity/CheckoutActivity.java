@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.hst.osa_lilamore.R;
@@ -39,10 +41,13 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
     private String addressID = "";
     private String orderID = "";
     private String purchaseOrderID = "";
+    private String paymentStatus = "";
     private TextView name, phone, address;
     private EditText promoCode;
     private TextView checkPromo;
     private TextView itemPrice, txtDelivery, deliveryPrice, offerPrice, totalPrice, reviewOrder;
+    private ImageView walletImg, codImg;
+    private boolean walletClick = false, codClick = false;
     private int pos;
     AddressArrayList addressList;
     ArrayList<AddressList> addressArrayList = new ArrayList<>();
@@ -81,6 +86,12 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
 
         reviewOrder = (TextView) findViewById(R.id.review_order);
         reviewOrder.setOnClickListener(this);
+
+        walletImg = (ImageView) findViewById(R.id.wallet_radio);
+        walletImg.setOnClickListener(this);
+
+        codImg = (ImageView) findViewById(R.id.cash_radio);
+        codImg.setOnClickListener(this);
 
         initiateServices();
         getAddressList();
@@ -140,11 +151,39 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
         try {
             jsonObject.put(OSAConstants.KEY_USER_ID, id);
             jsonObject.put(OSAConstants.PARAMS_PURCHASE_ORDER_ID, purchaseOrderID);
-            jsonObject.put(OSAConstants.PARAMS_ADDRESS_ID, addressID);
+            jsonObject.put(OSAConstants.KEY_PROMO, promoCode.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         String url = OSAConstants.BUILD_URL + OSAConstants.APPLY_PROMO;
+        serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
+    }
+
+    private void useWallet() {
+        resCheck = "wallet";
+        JSONObject jsonObject = new JSONObject();
+        String id = PreferenceStorage.getUserId(this);
+        try {
+            jsonObject.put(OSAConstants.KEY_USER_ID, id);
+            jsonObject.put(OSAConstants.PARAMS_PURCHASE_ORDER_ID, purchaseOrderID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url = OSAConstants.BUILD_URL + OSAConstants.USE_WALLET;
+        serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
+    }
+
+    private void removeWallet() {
+        resCheck = "wallet";
+        JSONObject jsonObject = new JSONObject();
+        String id = PreferenceStorage.getUserId(this);
+        try {
+            jsonObject.put(OSAConstants.KEY_USER_ID, id);
+            jsonObject.put(OSAConstants.PARAMS_PURCHASE_ORDER_ID, purchaseOrderID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url = OSAConstants.BUILD_URL + OSAConstants.REMOVE_WALLET;
         serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
     }
 
@@ -212,10 +251,10 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
                     getOrderDetails();
                 }
                 if (resCheck.equalsIgnoreCase("detail")) {
-                    JSONArray orderObjData = response.getJSONArray("order_details");
+                    JSONArray orderObjData = response.getJSONArray("cart_items");
 
                     JSONObject data = orderObjData.getJSONObject(0);
-                    purchaseOrderID = data.getString("purchse_order_id");
+                    purchaseOrderID = data.getString("purchase_order_id");
                     String nameString = data.getString("full_name");
                     String mobileString = data.getString("mobile_number");
                     String houseString = data.getString("house_no");
@@ -227,6 +266,7 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
                     String promoString = data.getString("promo_amount");
                     String walletString = data.getString("wallet_amount");
                     String paidString = data.getString("paid_amount");
+                    paymentStatus = data.getString("payment_status");
 
                     String addressFinal = houseString.concat(streetString).concat("\n").concat(cityString).concat(" - ").concat(pincodeString);
                     String temMobile = "";
@@ -247,8 +287,74 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
 
                 }
                 if (resCheck.equalsIgnoreCase("promo")) {
-                    startActivity(getIntent());
-                    finish();
+                    JSONArray orderObjData = response.getJSONArray("order_details");
+
+                    JSONObject data = orderObjData.getJSONObject(0);
+                    purchaseOrderID = data.getString("purchase_order_id");
+                    String nameString = data.getString("full_name");
+                    String mobileString = data.getString("mobile_number");
+                    String houseString = data.getString("house_no");
+                    String streetString = data.getString("street");
+                    String cityString = data.getString("city");
+                    String pincodeString = data.getString("pincode");
+
+                    String itemString = data.getString("total_amount");
+                    String promoString = data.getString("promo_amount");
+                    String walletString = data.getString("wallet_amount");
+                    String paidString = data.getString("paid_amount");
+                    paymentStatus = data.getString("payment_status");
+
+                    String addressFinal = houseString.concat(streetString).concat("\n").concat(cityString).concat(" - ").concat(pincodeString);
+                    String temMobile = "";
+                    String mobileFinal = temMobile.concat("+91").concat(mobileString);
+                    String itemFinal = ("₹").concat(itemString);
+                    String promoFinal = ("-₹").concat(promoString);
+                    String walletFinal = ("₹").concat(walletString);
+                    String paidFinal = ("₹").concat(paidString);
+
+                    name.setText(nameString);
+                    phone.setText(mobileFinal);
+                    address.setText(addressFinal);
+
+                    itemPrice.setText(itemFinal);
+                    deliveryPrice.setText(walletFinal);
+                    offerPrice.setText(promoFinal);
+                    totalPrice.setText(paidFinal);
+                }
+                if (resCheck.equalsIgnoreCase("wallet")) {
+                    JSONArray orderObjData = response.getJSONArray("order_details");
+
+                    JSONObject data = orderObjData.getJSONObject(0);
+                    purchaseOrderID = data.getString("purchase_order_id");
+                    String nameString = data.getString("full_name");
+                    String mobileString = data.getString("mobile_number");
+                    String houseString = data.getString("house_no");
+                    String streetString = data.getString("street");
+                    String cityString = data.getString("city");
+                    String pincodeString = data.getString("pincode");
+
+                    String itemString = data.getString("total_amount");
+                    String promoString = data.getString("promo_amount");
+                    String walletString = data.getString("wallet_amount");
+                    String paidString = data.getString("paid_amount");
+                    paymentStatus = data.getString("payment_status");
+
+                    String addressFinal = houseString.concat(streetString).concat("\n").concat(cityString).concat(" - ").concat(pincodeString);
+                    String temMobile = "";
+                    String mobileFinal = temMobile.concat("+91").concat(mobileString);
+                    String itemFinal = ("₹").concat(itemString);
+                    String promoFinal = ("-₹").concat(promoString);
+                    String walletFinal = ("₹").concat(walletString);
+                    String paidFinal = ("₹").concat(paidString);
+
+                    name.setText(nameString);
+                    phone.setText(mobileFinal);
+                    address.setText(addressFinal);
+
+                    itemPrice.setText(itemFinal);
+                    deliveryPrice.setText(walletFinal);
+                    offerPrice.setText(promoFinal);
+                    totalPrice.setText(paidFinal);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -271,8 +377,36 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
                 checkPromoCode();
             }
         }
+        if (view == walletImg) {
+            assert walletImg != null;
+            if (walletClick) {
+                walletImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
+                walletClick = false;
+                removeWallet();
+            } else {
+                walletImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_checked));
+                walletClick = true;
+                useWallet();
+            }
+        }
+        if (view == codImg) {
+            assert codImg != null;
+            if (walletClick) {
+                codImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
+                codClick = false;
+            } else {
+                codImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_checked));
+                codClick = true;
+            }
+        }
         if (view == reviewOrder) {
             Intent i = new Intent(this, ReviewOrderActivity.class);
+            if (codClick) {
+                i.putExtra("payment", "COD");
+            } else {
+
+                i.putExtra("payment", paymentStatus);
+            }
             startActivity(i);
         }
     }

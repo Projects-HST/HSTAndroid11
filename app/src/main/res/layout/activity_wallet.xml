@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="WelcomeTo Easy Shop Wallet..."
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="40dp"
                     android:layout_marginStart="10dp"

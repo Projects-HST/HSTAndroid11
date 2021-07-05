@@ -26,7 +26,8 @@
         <RelativeLayout
             android:id="@+id/changeLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/imgView_1"
@@ -59,16 +60,17 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/setLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/changeLayout">
+            android:id="@+id/aboutLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/changeLayout"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/imgView_2"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="16dp"
+                
                 android:src="@drawable/ic_about_us" />
 
             <TextView
@@ -76,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                
                 android:layout_toEndOf="@id/imgView_2"
                 android:fontFamily="@font/medium"
                 android:gravity="center"
@@ -95,21 +97,28 @@
                 android:padding="4dp"
                 android:src="@drawable/ic_right_black" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/privLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/aboutLayout"
+            android:gravity="center">
+
             <ImageView
                 android:id="@+id/imgView_3"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_below="@id/imgView_2"
-                android:layout_marginTop="16dp"
+                
                 android:src="@drawable/ic_privacy" />
 
             <TextView
                 android:id="@+id/privacySecurity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imgView_2"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                
                 android:layout_toEndOf="@id/imgView_3"
                 android:fontFamily="@font/medium"
                 android:gravity="center"
@@ -128,22 +137,26 @@
                 android:padding="4dp"
                 android:src="@drawable/ic_right_black" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/suppLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/privLayout"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/imgView_4"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_below="@id/imgView_3"
-                android:layout_marginTop="16dp"
                 android:src="@drawable/ic_help_support" />
 
             <TextView
                 android:id="@+id/helpSupport"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imgView_3"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_toEndOf="@id/imgView_4"
                 android:fontFamily="@font/medium"
                 android:gravity="center"
@@ -162,12 +175,18 @@
                 android:padding="4dp"
                 android:src="@drawable/ic_right_black" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/setLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/suppLayout">
+
             <TextView
                 android:id="@+id/recNotify"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/helpSupport"
-                android:layout_marginTop="16dp"
+                android:layout_height="40dp"
                 android:fontFamily="@font/medium"
                 android:gravity="center"
                 android:text="@string/receive_notify"
@@ -177,8 +196,8 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/subNotification"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignTop="@id/recNotify"
                 android:layout_alignBottom="@id/recNotify"
                 android:layout_alignParentEnd="true"
@@ -187,9 +206,8 @@
             <TextView
                 android:id="@+id/rec_News"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_below="@id/recNotify"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/medium"
                 android:gravity="center"
                 android:text="@string/receive_notify"

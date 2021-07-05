@@ -1,12 +1,17 @@
 package com.hst.osa_lilamore.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.activity.CartActivity;
 import com.hst.osa_lilamore.bean.support.CartItem;
+import com.hst.osa_lilamore.bean.support.Product;
 import com.hst.osa_lilamore.helpers.ProgressDialogHelper;
 import com.hst.osa_lilamore.servicehelpers.ServiceHelper;
 import com.hst.osa_lilamore.serviceinterfaces.IServiceListener;
@@ -40,7 +46,7 @@ public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapte
     CartItem product;
     private ServiceHelper serviceHelper;
     private ProgressDialogHelper progressDialogHelper;
-    CartItemListAdapter.MyViewHolder myViewHolder;
+    MyViewHolder myViewHolder;
 
     @Override
     public void onResponse(JSONObject response) {
@@ -187,7 +193,7 @@ public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapte
     }
 
 
-    public  CartItemListAdapter(Context context, ArrayList<CartItem> ProductArrayList, CartItemListAdapter.OnItemClickListener onItemClickListener) {
+    public  CartItemListAdapter(Context context, ArrayList<CartItem> ProductArrayList, OnItemClickListener onItemClickListener) {
         this.mContext = context;
         this.productArrayList = ProductArrayList;
         this.onItemClickListener = onItemClickListener;
@@ -199,7 +205,7 @@ public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapte
 
 
     @Override
-    public CartItemListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_cart, parent, false);
 
@@ -208,11 +214,11 @@ public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapte
         serviceHelper.setServiceListener(this);
         progressDialogHelper = new ProgressDialogHelper(itemView.getContext());
         UserID = PreferenceStorage.getUserId(itemView.getContext());
-        return new CartItemListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(CartItemListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         product = productArrayList.get(position);
         myViewHolder = holder;
         holder.txtProductName.setText(product.getproduct_name());

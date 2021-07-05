@@ -52,14 +52,14 @@
                         android:gravity="center"
                         android:text="@string/create_note"
                         android:textColor="@color/text_black"
-                        android:textSize="22sp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginHorizontal="40dp"
-                        android:fontFamily="@font/light"
+                        android:fontFamily="@font/regular"
                         android:gravity="center"
                         android:text="@string/create_msg"
                         android:textColor="@color/grey"
@@ -79,6 +79,7 @@
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginBottom="10dp"
                             android:hint="@string/name"
+                            android:fontFamily="@font/regular"
                             app:boxStrokeColor="@color/lite_grey"
                             app:hintTextColor="@color/text_black">
 
@@ -87,9 +88,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textEmailAddress"
+                                android:fontFamily="@font/regular"
                                 android:maxLength="30"
                                 android:textColor="@color/grey"
-                                android:textSize="14sp" />
+                                android:textSize="16sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -100,6 +102,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/regular"
                             android:hint="@string/mail"
                             app:boxStrokeColor="@color/lite_grey"
                             app:hintTextColor="@color/text_black">
@@ -108,10 +111,11 @@
                                 android:id="@+id/txt_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/regular"
                                 android:inputType="textEmailAddress"
                                 android:maxLength="30"
                                 android:textColor="@color/grey"
-                                android:textSize="14sp" />
+                                android:textSize="16sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -122,6 +126,7 @@
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginBottom="10dp"
                             android:hint="@string/mobile"
+                            android:fontFamily="@font/regular"
                             app:boxStrokeColor="@color/lite_grey"
                             app:hintTextColor="@color/text_black"
                             app:prefixText="+91">
@@ -131,8 +136,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
+                                android:fontFamily="@font/regular"
                                 android:maxLength="10"
-                                android:padding="10dp"
                                 android:textColor="@color/grey"
                                 android:textSize="16sp" />
 
@@ -145,6 +150,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/regular"
                             android:hint="@string/password"
                             app:passwordToggleEnabled="true"
                             app:boxStrokeColor="@color/lite_grey"
@@ -154,10 +160,11 @@
                                 android:id="@+id/txt_password"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/regular"
                                 android:inputType="textPassword"
                                 android:maxLength="30"
                                 android:textColor="@color/grey"
-                                android:textSize="14sp" />
+                                android:textSize="16sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -167,11 +174,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginTop="20dp"
-                            android:fontFamily="@font/medium"
+                            android:fontFamily="@font/semibold"
                             android:text="@string/signUp"
                             android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -191,7 +198,7 @@
                             android:layout_marginTop="20dp"
                             android:background="@drawable/btn_half_round_color"
                             android:drawablePadding="10dp"
-                            android:fontFamily="@font/medium"
+                            android:fontFamily="@font/regular"
                             android:gravity="center"
                             android:paddingHorizontal="20dp"
                             android:text="@string/ggLogIn"
@@ -210,7 +217,7 @@
                             android:layout_marginVertical="20dp"
                             android:background="@drawable/btn_hf_rd_color_2"
                             android:drawablePadding="20dp"
-                            android:fontFamily="@font/medium"
+                            android:fontFamily="@font/regular"
                             android:gravity="center"
                             android:paddingHorizontal="20dp"
                             android:text="@string/fbLogIn"

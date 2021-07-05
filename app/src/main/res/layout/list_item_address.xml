@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/address1"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:layout_weight="0.9"/>
 
@@ -51,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="5dp"
+            android:fontFamily="@font/regular"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
             android:textSize="12sp" />
@@ -62,6 +64,7 @@
             android:layout_below="@id/cusAddress1"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/regular"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
             android:textSize="12sp" />
@@ -73,6 +76,7 @@
             android:layout_below="@id/cusAddress2"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/regular"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
             android:textSize="12sp" />
@@ -84,6 +88,7 @@
             android:layout_below="@id/cusAddress2"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/regular"
             android:layout_toEndOf="@id/cityName"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
@@ -95,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/pinCode"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/regular"
             android:layout_marginStart="5dp"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
@@ -119,6 +125,8 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="0.495"
+                android:textColor="@color/black"
+                android:fontFamily="@font/semibold"
                 android:background="@drawable/grey_bg_btn"
                 android:gravity="center"
                 android:text="@string/btnEdit" />
@@ -135,8 +143,10 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="0.495"
+                android:fontFamily="@font/semibold"
                 android:background="@drawable/grey_bg_btn"
                 android:gravity="center"
+                android:textColor="@color/price_red"
                 android:text="@string/btnDelete" />
 
         </LinearLayout>

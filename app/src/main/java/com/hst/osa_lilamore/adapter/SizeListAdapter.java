@@ -1,6 +1,7 @@
 package com.hst.osa_lilamore.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hst.osa_lilamore.R;
+import com.hst.osa_lilamore.bean.support.Category;
 import com.hst.osa_lilamore.bean.support.Size;
+import com.hst.osa_lilamore.utils.OSAValidator;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,7 +49,7 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
     }
 
 
-    public SizeListAdapter(ArrayList<Size> SizeArrayList, SizeListAdapter.OnItemClickListener onItemClickListener) {
+    public SizeListAdapter(ArrayList<Size> SizeArrayList, OnItemClickListener onItemClickListener) {
         this.sizeArrayList = SizeArrayList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -56,15 +60,15 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
 
 
     @Override
-    public SizeListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_size, parent, false);
 
-        return new SizeListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(SizeListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Size size = sizeArrayList.get(position);
         holder.txtSizeName.setText(size.getsize());
 //        holder.sizeLay.setOnClickListener(new View.OnClickListener() {

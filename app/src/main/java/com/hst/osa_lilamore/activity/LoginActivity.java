@@ -18,21 +18,25 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -56,11 +60,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, IServiceListener, DialogClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, IServiceListener,
+        DialogClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = LoginActivity.class.getName();
 
-    private TextView btnFacebook, btnGoogle, txtUseEmail, txtUseNumber, txtSignUp;
+    private TextView btnFacebook, btnGoogle, txtUseEmail, txtUseNumber, txtSignUp, forgotPassword;
     private TextInputLayout tiNumber, tiEmail, tiPassword;
     private ServiceHelper serviceHelper;
     private ProgressDialogHelper progressDialogHelper;
@@ -70,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
     private int mSelectedLoginMode = 0;
-    private String whichService = "", url = "", loginMethod = "number";
+    private String whichService = "", loginMethod = "number";
     private boolean isMobileLogin = true;
 
     private Button btnContinue;
@@ -88,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         page = getIntent().getExtras().getString("page");
         productID = getIntent().getExtras().getString("productObj");
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+//        FacebookSdk.sdkInitialize(getApplicationContext());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_toolbar);
         setSupportActionBar(toolbar);
@@ -96,9 +101,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ProductDetailActivity.class);
-                i.putExtra("productObj", productID);
-                startActivity(i);
+                if (page.equalsIgnoreCase("product")) {
+                    Intent i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.ProductDetailActivity.class);
+                    i.putExtra("page", "product");
+                    i.putExtra("productObj", productID);
+                    startActivity(i);
+                }
                 finish();
             }
         });
@@ -130,6 +138,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         txtSignUp = findViewById(R.id.txt_signUp);
         txtSignUp.setOnClickListener(this);
+
+        forgotPassword = findViewById(R.id.forgot_password);
+        forgotPassword.setOnClickListener(this);
 
         try {
             PackageInfo info = getApplicationContext().getPackageManager().getPackageInfo(
@@ -206,9 +217,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             signIn();
         }
         if (v == btnFacebook) {
-            loginManager.logInWithReadPermissions(LoginActivity.this, (Arrays.asList("email", "public_profile")));
+            LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, (Arrays.asList("public_profile", "email")));
 //            PreferenceStorage.saveLoginMode(this, OSAConstants.FACEBOOK);
 //            mSelectedLoginMode = OSAConstants.FACEBOOK;
+            facebookLogin();
         }
         if (v == txtUseEmail) {
             loginMethod = "email";
@@ -221,7 +233,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             layoutNumber.setVisibility(View.VISIBLE);
         }
         if (v == txtSignUp) {
-            Intent i = new Intent(getApplicationContext(), SignupActivity.class);
+            Intent i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.SignupActivity.class);
+            i.putExtra("page", page);
+            i.putExtra("product_id", productID);
+            startActivity(i);
+        }
+        if (v == forgotPassword) {
+            Intent i = new Intent(getApplicationContext(), ForgotPassword.class);
             i.putExtra("page", page);
             i.putExtra("product_id", productID);
             startActivity(i);
@@ -313,10 +331,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String first = "" + account.getGivenName();
         String last = "" + account.getFamilyName();
         String mail = "" + account.getEmail();
-        String ggId = "" + account.getId();
         String photoUrl = "" + account.getPhotoUrl();
 
-        Log.d(TAG, "id" + ggId);
         PreferenceStorage.saveSocialNetworkProfilePic(getApplicationContext(), photoUrl);
 
         String GCMKey = PreferenceStorage.getGCM(this);
@@ -362,18 +378,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+//    private void handleSignInResult(GoogleSignInResult completedTask){
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            String name = "" + account.getDisplayName();
+//            String name = "" + account.getDisplayName();
             String first = "" + account.getGivenName();
             String last = "" + account.getFamilyName();
             String mail = "" + account.getEmail();
-            String googleId = "" + account.getId();
             String photoUrl = "" + account.getPhotoUrl();
 
-            Log.d(TAG, "name" + name + "id" + googleId);
-            PreferenceStorage.saveSocialNetworkProfilePic(getApplicationContext(), photoUrl);
+//            Log.d(TAG, "name" + name + "id" + googleId);
 
+            PreferenceStorage.saveSocialNetworkProfilePic(getApplicationContext(), photoUrl);
             String GCMKey = PreferenceStorage.getGCM(this);
             whichService = "google";
             JSONObject jsonObject = new JSONObject();
@@ -398,75 +414,91 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
         }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
-//    public void facebookLogin() {
-//
-//        loginManager = LoginManager.getInstance();
-////        callbackManager = CallbackManager.Factory.create();
-//
-//        loginManager.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-//            //        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-//            @Override
-//            public void onSuccess(LoginResult loginResult) {
-//                AccessToken accessToken = loginResult.getAccessToken();
-//                GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-//                    @Override
-//                    public void onCompleted(JSONObject object, GraphResponse response) {
-//                        if (object != null) {
-//                            String first = object.optString("first_name");
-//                            String last = object.optString("last_name");
-//                            String email = object.optString("email");
-//                            String fbUserID = object.optString("id");
-//                            String gender = object.optString("gender");
-//                            String birthday = object.optString("birthday");
-//
-//                            Log.d(TAG, "email" + email + "facebook gender" + gender + "birthday" + birthday);
-//
-//                            url = "https://graph.facebook.com/" + fbUserID + "/picture?type=large";
-////                            disconnectFromFacebook();
-//                            // do action after Facebook login success
-//                            // or call your API
-////                            PreferenceStorage.saveSocialNetworkProfilePic(getApplicationContext(), url);
-//                            whichService = "google";
-//
-//                            String GCMKey = PreferenceStorage.getGCM(getApplicationContext());
-//                            JSONObject jsonObject = new JSONObject();
-//                            try {
-//                                jsonObject.put(OSAConstants.PARAMS_EMAIL, email);
-//                                jsonObject.put(OSAConstants.PARAMS_FIRST_NAME, first);
-//                                jsonObject.put(OSAConstants.PARAMS_LAST_NAME, last);
-//                                jsonObject.put(OSAConstants.PARAMS_GCM_KEY, GCMKey);
-//                                jsonObject.put(OSAConstants.PARAMS_LOGIN_TYPE, "FB");
-//                                jsonObject.put(OSAConstants.PARAMS_MOBILE_TYPE, "1");
-//                                jsonObject.put(OSAConstants.PARAMS_LOGIN_PORTAL, "App");
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
+    public void facebookLogin() {
+
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            //        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                AccessToken accessToken = loginResult.getAccessToken();
+                GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        String first = "";
+                        String last = "";
+                        String email = "";
+                        String fbUserID = "";
+                        String profilePicUrl = "";
+                        if (object != null) {
+                            first = object.optString("first_name");
+                            last = object.optString("last_name");
+                            email = object.optString("email");
+                            fbUserID = object.optString("id");
+//                                profilePicUrl = object.getJSONObject("picture").getJSONObject("data").optString("url");
+                        }
+
+                        Log.d(TAG, "email" + email + "url" + profilePicUrl);
+
+                        String url = "https://graph.facebook.com/" + fbUserID + "picture?type=square&type=large&redirect=false";
+//                            disconnectFromFacebook();
+                        // do action after Facebook login success
+                        // or call your API
+                        PreferenceStorage.saveSocialNetworkProfilePic(getApplicationContext(), url);
+                        whichService = "faceBook";
+
+                        String GCMKey = PreferenceStorage.getGCM(getApplicationContext());
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put(OSAConstants.PARAMS_EMAIL, email);
+                            jsonObject.put(OSAConstants.PARAMS_FIRST_NAME, first);
+                            jsonObject.put(OSAConstants.PARAMS_LAST_NAME, last);
+                            jsonObject.put(OSAConstants.PARAMS_GCM_KEY, GCMKey);
+                            jsonObject.put(OSAConstants.PARAMS_LOGIN_TYPE, "FB");
+                            jsonObject.put(OSAConstants.PARAMS_MOBILE_TYPE, "1");
+                            jsonObject.put(OSAConstants.PARAMS_LOGIN_PORTAL, "App");
 //                            }
-//                            progressDialogHelper.showProgressDialog(getString(R.string.progress_loading));
-//                            String serverURL = OSAConstants.BUILD_URL + OSAConstants.FB_GPLUS_LOGIN;
-//                            serviceHelper.makeGetServiceCall(jsonObject.toString(), serverURL);
-//                        }
+//                            object.put(OSAConstants.PARAMS_EMAIL, email);
+//                            object.put(OSAConstants.PARAMS_FIRST_NAME, first);
+//                            object.put(OSAConstants.PARAMS_LAST_NAME, last);
+//                            object.put(OSAConstants.PARAMS_GCM_KEY, GCMKey);
+//                            object.put(OSAConstants.PARAMS_LOGIN_TYPE, "FB");
+//                            object.put(OSAConstants.PARAMS_MOBILE_TYPE, "1");
+//                            object.put(OSAConstants.PARAMS_LOGIN_PORTAL, "App");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialogHelper.showProgressDialog(getString(R.string.progress_loading));
+                        String serverURL = OSAConstants.BUILD_URL + OSAConstants.FB_GPLUS_LOGIN;
+                        serviceHelper.makeGetServiceCall(jsonObject.toString(), serverURL);
+//                    } catch(JSONException e){
+//                        e.printStackTrace();
 //                    }
-//                });
-//                Bundle parameters = new Bundle();
-//                parameters.putString("fields", "id,name,first_name,last_name,email,gender,birthday");
-//                request.setParameters(parameters);
-//                request.executeAsync();
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//                Log.v("LoginScreen", "---onCancel");
-//            }
-//
-//            @Override
-//            public void onError(FacebookException error) {
-//                // here write code when get error
-//                Log.v("LoginScreen", "----onError: " + error.getMessage());
-//            }
-//        });
-//    }
+                    }
+                });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,first_name,last_name,email");
+//                parameters.putString("fields", "id,name,first_name,last_name,email,picture.type(large)");
+                request.setParameters(parameters);
+                request.executeAsync();
+            }
+
+            @Override
+            public void onCancel() {
+                Log.v("LoginScreen", "---onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                // here write code when get error
+                Log.v("LoginScreen", "----onError: " + error.getMessage());
+            }
+        });
+    }
 
     public void disconnectFromFacebook() {
         if (AccessToken.getCurrentAccessToken() == null) {
@@ -489,6 +521,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+//            GoogleSignInResult task = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(task);
         } else {
             // Signed out, show unauthenticated UI.
@@ -539,26 +572,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialogHelper.hideProgressDialog();
         if (validateResponse(response)) {
             if (whichService.equalsIgnoreCase("mobile")) {
-                Intent i = new Intent(getApplicationContext(), NumberVerificationActivity.class);
+                Intent i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.NumberVerificationActivity.class);
                 i.putExtra("page", page);
                 i.putExtra("productObj", productID);
                 startActivity(i);
 
             }
             if (whichService.equalsIgnoreCase("google")) {
-                Intent i;
-                if (page.equalsIgnoreCase("product")) {
-                    i = new Intent(getApplicationContext(), ProductDetailActivity.class);
-                    i.putExtra("productObj", productID);
-                } else {
-                    i = new Intent(getApplicationContext(), MainActivity.class);
-                }
-                startActivity(i);
-                finish();
-            }
-            if (whichService.equalsIgnoreCase("email")) {
                 PreferenceStorage.setFirstTimeLaunch(getApplicationContext(), false);
-//                    Toast.makeText(getApplicationContext(), "Login successfully", Toast.LENGTH_SHORT).show();
                 JSONObject data = null;
                 try {
                     data = response.getJSONObject("userData");
@@ -569,7 +590,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String email = data.getString("email");
 
                     PreferenceStorage.saveUserId(getApplicationContext(), userId);
-                    PreferenceStorage.saveName(getApplicationContext(), fullName);
+                    PreferenceStorage.saveFullName(getApplicationContext(), fullName);
                     PreferenceStorage.saveGender(getApplicationContext(), gender);
                     PreferenceStorage.saveProfilePic(getApplicationContext(), profilePic);
                     PreferenceStorage.saveEmail(getApplicationContext(), email);
@@ -577,12 +598,77 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                Intent i;
+                if (page.equalsIgnoreCase("product")) {
+                    i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.ProductDetailActivity.class);
+                    i.putExtra("page", "product");
+                    i.putExtra("productObj", productID);
+                } else {
+                    i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.MainActivity.class);
+                }
+                startActivity(i);
+                finish();
+            }
+            if (whichService.equalsIgnoreCase("faceBook")) {
+                PreferenceStorage.setFirstTimeLaunch(getApplicationContext(), false);
+                JSONObject data = null;
+                try {
+                    data = response.getJSONObject("userData");
+                    String userId = data.getString("customer_id");
+                    String fullName = data.getString("first_name");
+                    String gender = data.getString("gender");
+                    String profilePic = data.getString("profile_picture");
+                    String email = data.getString("email");
+
+                    PreferenceStorage.saveUserId(getApplicationContext(), userId);
+                    PreferenceStorage.saveFullName(getApplicationContext(), fullName);
+                    PreferenceStorage.saveGender(getApplicationContext(), gender);
+//                    PreferenceStorage.saveProfilePic(getApplicationContext(), profilePic);
+                    PreferenceStorage.saveEmail(getApplicationContext(), email);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Intent i;
+                if (page.equalsIgnoreCase("product")) {
+                    i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.ProductDetailActivity.class);
+                    i.putExtra("page", "product");
+                    i.putExtra("productObj", productID);
+                } else {
+                    i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.MainActivity.class);
+                }
+                startActivity(i);
+                finish();
+            }
+            if (whichService.equalsIgnoreCase("email")) {
+                PreferenceStorage.setFirstTimeLaunch(getApplicationContext(), false);
+//                    Toast.makeText(getApplicationContext(), "Login successfully", Toast.LENGTH_SHORT).show();
+                JSONObject data = null;
+                String picture = "";
+                try {
+                    data = response.getJSONObject("userData");
+                    String userId = data.getString("customer_id");
+                    String fullName = data.getString("first_name");
+                    String gender = data.getString("gender");
+                    picture = data.getString("profile_picture");
+                    String email = data.getString("email");
+
+                    PreferenceStorage.saveUserId(getApplicationContext(), userId);
+                    PreferenceStorage.saveName(getApplicationContext(), fullName);
+                    PreferenceStorage.saveGender(getApplicationContext(), gender);
+//                    PreferenceStorage.saveProfilePic(getApplicationContext(), profilePic);
+                    PreferenceStorage.saveEmail(getApplicationContext(), email);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Intent homeIntent;
                 if (page.equalsIgnoreCase("product")) {
-                    homeIntent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+                    homeIntent = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.ProductDetailActivity.class);
+                    homeIntent.putExtra("page", "product");
                     homeIntent.putExtra("productObj", productID);
                 } else {
-                    homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    homeIntent = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.MainActivity.class);
                     homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 ////                    homeIntent.putExtra("profile_state", "new");
                 }
@@ -605,6 +691,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onAlertNegativeClicked(int tag) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }

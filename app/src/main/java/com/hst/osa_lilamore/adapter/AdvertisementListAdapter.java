@@ -6,11 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.bean.support.Advertisement;
+import com.hst.osa_lilamore.bean.support.Category;
 import com.hst.osa_lilamore.utils.OSAValidator;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +23,7 @@ public class AdvertisementListAdapter extends RecyclerView.Adapter<Advertisement
 
     private ArrayList<Advertisement> advertisementArrayList;
     Context context;
-    private AdvertisementListAdapter.OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView categoryImage;
@@ -44,7 +47,7 @@ public class AdvertisementListAdapter extends RecyclerView.Adapter<Advertisement
     }
 
 
-    public AdvertisementListAdapter(ArrayList<Advertisement> AdvertisementArrayList, AdvertisementListAdapter.OnItemClickListener onItemClickListener) {
+    public AdvertisementListAdapter(ArrayList<Advertisement> AdvertisementArrayList, OnItemClickListener onItemClickListener) {
         this.advertisementArrayList = AdvertisementArrayList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -55,15 +58,15 @@ public class AdvertisementListAdapter extends RecyclerView.Adapter<Advertisement
 
 
     @Override
-    public AdvertisementListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_advertisement, parent, false);
 
-        return new AdvertisementListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(AdvertisementListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Advertisement advertisement = advertisementArrayList.get(position);
 
         if (OSAValidator.checkNullString(advertisement.getad_img())) {

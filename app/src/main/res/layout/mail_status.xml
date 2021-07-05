@@ -57,14 +57,16 @@
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/mail_login"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="40dp"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/semibold"
+            android:gravity="center"
             android:text="@string/signIn"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

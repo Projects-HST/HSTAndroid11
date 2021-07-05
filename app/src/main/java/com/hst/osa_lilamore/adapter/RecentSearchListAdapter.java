@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.bean.support.RecentSearch;
+import com.hst.osa_lilamore.bean.support.SubCategory;
 
 import java.util.ArrayList;
 
 public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchListAdapter.MyViewHolder> {
 
     private ArrayList<RecentSearch> recentSearchArrayList;
-    private RecentSearchListAdapter.OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -43,7 +44,7 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
 
     }
 
-    public RecentSearchListAdapter(ArrayList<RecentSearch> CategoryArrayList, RecentSearchListAdapter.OnItemClickListener onItemClickListener) {
+    public RecentSearchListAdapter(ArrayList<RecentSearch> CategoryArrayList, OnItemClickListener onItemClickListener) {
         this.recentSearchArrayList = CategoryArrayList;
 //        this.context = context;
         this.onItemClickListener = onItemClickListener;

@@ -85,7 +85,7 @@
                     android:fontFamily="@font/medium"
                     android:gravity="center"
                     android:text="@string/change_delivery"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -146,7 +146,7 @@
                         android:paddingStart="40dp"
                         android:paddingEnd="40dp"
                         android:text="@string/apply"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
 
                 </RelativeLayout>
 
@@ -652,7 +652,7 @@
                         android:paddingStart="40dp"
                         android:paddingEnd="40dp"
                         android:text="@string/verify"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
 
                 </RelativeLayout>
 
@@ -843,7 +843,7 @@
             android:fontFamily="@font/medium"
             android:gravity="center"
             android:text="@string/review_order"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 

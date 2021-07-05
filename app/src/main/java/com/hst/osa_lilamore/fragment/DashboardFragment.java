@@ -284,6 +284,7 @@ public class DashboardFragment extends Fragment implements IServiceListener, Dia
         product = productArrayList.get(position);
         Intent intent;
         intent = new Intent(getActivity(), ProductDetailActivity.class);
+        intent.putExtra("page", "best");
         intent.putExtra("productObj", product.getid());
         startActivity(intent);
     }
@@ -294,6 +295,7 @@ public class DashboardFragment extends Fragment implements IServiceListener, Dia
         product = productArrayList1.get(position);
         Intent intent;
         intent = new Intent(getActivity(), ProductDetailActivity.class);
+        intent.putExtra("page", "new");
         intent.putExtra("productObj", product.getid());
         startActivity(intent);
     }

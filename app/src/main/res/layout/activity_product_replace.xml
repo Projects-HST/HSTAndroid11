@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/original_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/order_played_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/foreground_grey"
+        android:elevation="20dp">
+
+        <RelativeLayout
+            android:id="@+id/click_detect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/corner_layout"/>
+
+        <RelativeLayout
+            android:id="@+id/corner_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:clickable="false"
+            android:background="@drawable/top_corners_round_bg_white"
+            android:elevation="20dp">
+
+            <TextView
+                android:id="@+id/txt_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/semibold"
+                android:text="@string/write_reviews"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_write"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/regular"
+                android:text=""
+                android:gravity="center"
+                android:textColor="@color/text_black"
+                android:textSize="18sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/product_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:numStars="5"
+                android:stepSize="1.0"
+                android:theme="@style/RatingBar" />
+
+
+            <EditText
+                android:id="@+id/edtComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ratingBar"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/regular"
+                android:hint="@string/comment"
+                android:minHeight="50dp"
+                android:textColor="@color/text_black"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/submit_review"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/edtComments"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="90dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/btn_size_color"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:text="@string/submit"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activity_toolbar"
+        style="@style/ToolBarStyle.Event"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/gradient_bg"
+        android:minHeight="@dimen/abc_action_bar_default_height_material"
+        android:theme="@style/ThemeOverlay.MyApp.ActionBar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/review_layout"
+        android:layout_below="@+id/activity_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/review_layout"
+            android:layout_below="@id/activity_toolbar"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listView_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="1dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
+                android:fontFamily="@font/semibold"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:text="What is the issue with the item?"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listView_questions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:padding="1dp" />
+
+
+            <TextView
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/btn_size_color"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:text="@string/submit"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

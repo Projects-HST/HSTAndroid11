@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "913925016204",
+    "project_id": "littleamoreosa",
+    "storage_bucket": "littleamoreosa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913925016204:android:56d43e8111d6290694c9a9",
+        "android_client_info": {
+          "package_name": "com.hst.osa_lilamore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913925016204-ronmh770dh3t98ls3luodndf7fr53m56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSrjPTrRSSy9u-zPLPppTjVmKFplCawZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913925016204-ronmh770dh3t98ls3luodndf7fr53m56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

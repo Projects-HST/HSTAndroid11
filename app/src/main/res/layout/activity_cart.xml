@@ -63,7 +63,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/total"
                         android:fontFamily="@font/semibold"
-                        android:textStyle="bold"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_weight="0.5"
@@ -74,13 +73,12 @@
                         android:id="@+id/total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="450"
+                        android:text=""
                         android:fontFamily="@font/semibold"
                         android:layout_weight="0.5"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:gravity="end"
-                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -99,7 +97,7 @@
                     android:fontFamily="@font/semibold"
                     android:gravity="center"
                     android:text="@string/check_out"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
 
             </RelativeLayout>

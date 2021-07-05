@@ -25,7 +25,7 @@
         <LinearLayout
             android:id="@+id/extLayout"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="40dp"
             android:background="@drawable/gradient_bg"
             android:orientation="vertical" />
 
@@ -33,7 +33,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerInParent="true"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="20dp"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp">
 
@@ -82,7 +82,7 @@
                         android:inputType="text"
                         android:maxLength="30"
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginBottom="10dp"
-                    android:hint="@string/address1"
+                    android:hint="@string/mail"
                     app:boxStrokeColor="@color/lite_grey"
                     app:hintTextColor="@color/text_black">
 
@@ -103,7 +103,7 @@
                         android:inputType="text"
                         android:maxLength="30"
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -138,10 +138,10 @@
                     android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:fontFamily="@font/medium"
-                    android:background="@drawable/btn_red_bg"
+                    android:background="@drawable/btn_size_color"
                     android:text="@string/update"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </LinearLayout>

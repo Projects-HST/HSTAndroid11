@@ -38,10 +38,10 @@
                 android:id="@+id/full_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/semibold"
                 android:padding="5dp"
                 android:text="Hello, Sign In"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -50,7 +50,9 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="@string/mail"
-                android:textColor="@color/text_grey" />
+                android:fontFamily="@font/regular"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 

@@ -110,7 +110,7 @@ public class NumberVerificationActivity extends AppCompatActivity implements Vie
                 IntentFilter filter = new IntentFilter();
                 filter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
                 if (smsReceiver == null) {
-                    smsReceiver = new NumberVerificationActivity.SmsBrReceiver();
+                    smsReceiver = new SmsBrReceiver();
                 }
                 getApplicationContext().registerReceiver(smsReceiver, filter);
 //                            startActivity(homeIntent);
@@ -292,6 +292,7 @@ public class NumberVerificationActivity extends AppCompatActivity implements Vie
                     Intent homeIntent;
                     if (page.equalsIgnoreCase("product")) {
                         homeIntent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+                        homeIntent.putExtra("page", "product");
                         homeIntent.putExtra("productObj", productID);
                     } else {
                         homeIntent = new Intent(getApplicationContext(), MainActivity.class);

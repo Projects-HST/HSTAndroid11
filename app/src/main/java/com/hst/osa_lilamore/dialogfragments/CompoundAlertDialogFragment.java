@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.ContextThemeWrapper;
 
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.interfaces.DialogClickListener;
@@ -54,7 +55,7 @@ public class CompoundAlertDialogFragment extends DialogFragment {
         tag = args.getInt(OSAConstants.ALERT_DIALOG_TAG, 0);
         String posButton = args.getString(OSAConstants.ALERT_DIALOG_POS_BUTTON, getActivity().getString(R.string.alert_button_ok));
         String negButton = args.getString(OSAConstants.ALERT_DIALOG_NEG_BUTTON, getActivity().getString(R.string.alert_button_cancel));
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.alertDialogueTheme))
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(posButton, mListener)

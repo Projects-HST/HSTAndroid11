@@ -1,18 +1,34 @@
 package com.hst.osa_lilamore.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hst.osa_lilamore.R;
+import com.hst.osa_lilamore.bean.support.Product;
 import com.hst.osa_lilamore.bean.support.Wallet;
+import com.hst.osa_lilamore.utils.OSAValidator;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.MyViewHolder> {
 
@@ -41,7 +57,7 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.My
     }
 
 
-    public WalletListAdapter(ArrayList<Wallet> walletArrayList, WalletListAdapter.OnItemClickListener onItemClickListener) {
+    public WalletListAdapter(ArrayList<Wallet> walletArrayList, OnItemClickListener onItemClickListener) {
         this.walletArrayList = walletArrayList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -52,15 +68,15 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.My
 
 
     @Override
-    public WalletListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_wallet, parent, false);
 
-        return new WalletListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(WalletListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Wallet wallet = walletArrayList.get(position);
 
         holder.txtTransactionName.setText(wallet.getnotes());

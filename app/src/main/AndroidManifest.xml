@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OSA"
+        android:theme="@style/AppThemeNoActionBarLogin"
         android:usesCleartextTraffic="true">
 
         <uses-library
@@ -41,7 +41,6 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/purple_200" />
 
-
         <activity android:name=".activity.SplashscreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,13 +52,12 @@
             android:name=".activity.WelcomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBarLogin"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.OSA"
+            android:theme="@style/AppThemeNoActionBarLogin"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.LoginActivity"
@@ -96,32 +94,32 @@
             android:name=".activity.CategoryActivity"
             android:label="@string/category"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.OSA" />
+            android:theme="@style/AppThemeNoActionBarLogin" />
         <activity
             android:name=".activity.SubCategoryActivity"
             android:label="@string/category"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.OSA" />
+            android:theme="@style/AppThemeNoActionBarLogin" />
         <activity
             android:name=".activity.ProductDetailActivity"
             android:label="@string/category"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.OSA" />
+            android:theme="@style/AppThemeNoActionBarLogin" />
         <activity
             android:name=".activity.SearchResultActivity"
             android:label="@string/category"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.OSA" />
+            android:theme="@style/AppThemeNoActionBarLogin" />
         <activity
             android:name=".activity.CartActivity"
             android:label="@string/cart"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.OSA" />
+            android:theme="@style/AppThemeNoActionBarLogin" />
         <activity
             android:name=".activity.ShippingAddressActivity"
             android:label="@string/address"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.OSA" />
+            android:theme="@style/AppThemeNoActionBarLogin" />
         <activity
             android:name=".activity.AddAddressActivity"
             android:label="@string/address"
@@ -151,6 +149,49 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBarLogin"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activity.OrderHistoryActivity"
+            android:label="@string/go_orders"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activity.OrderHistoryDetailPage"
+            android:label="@string/go_orders"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activity.ReplaceProductActivity"
+            android:label="@string/go_orders"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activity.TrackOrderActivity"
+            android:label="@string/go_orders"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activity.AdvancedFilterActivity"
+            android:label="@string/go_orders"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activity.AdvanceFilterResultActivity"
+            android:label="@string/go_orders"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBarLogin"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
             android:name=".ccavenue.activity.InitialScreenActivity"
             android:label="@string/payment"
@@ -204,7 +245,7 @@
             android:label="@string/side_menu_settings"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBarLogin"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

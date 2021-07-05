@@ -1,9 +1,11 @@
 package com.hst.osa_lilamore.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.bean.support.Review;
+import com.hst.osa_lilamore.utils.OSAValidator;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -46,7 +50,7 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.My
     }
 
 
-    public ReviewListAdapter(ArrayList<Review> ReviewArrayList, ReviewListAdapter.OnItemClickListener onItemClickListener) {
+    public ReviewListAdapter(ArrayList<Review> ReviewArrayList, OnItemClickListener onItemClickListener) {
         this.ReviewArrayList = ReviewArrayList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -57,15 +61,15 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.My
 
 
     @Override
-    public ReviewListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_review, parent, false);
 
-        return new ReviewListAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ReviewListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Review review = ReviewArrayList.get(position);
 
         holder.txtUserName.setText(review.getcustomer_name());
