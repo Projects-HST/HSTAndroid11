@@ -75,6 +75,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/change_address"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="20dp"
@@ -200,7 +201,8 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingBottom="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -400,7 +402,8 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingBottom="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -409,7 +412,7 @@
                     android:layout_marginEnd="20dp"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/medium"
-                    android:text="@string/debit_card"
+                    android:text="@string/avenue"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -599,7 +602,8 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingBottom="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -622,10 +626,10 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:visibility="gone"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/btn_round_light_broder"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/upi_id"
@@ -674,20 +678,20 @@
                     android:layout_marginEnd="20dp"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/medium"
-                    android:text="@string/wallet"
+                    android:text="@string/avenue"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:drawableStartCompat="@drawable/ic_pay_wallet" />
+                    app:drawableStartCompat="@drawable/ic_credit_card" />
 
                 <ImageView
-                    android:id="@+id/wallet_radio"
+                    android:id="@+id/ccavenue_radio"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:padding="10dp"
-                    android:src="@drawable/ic_check_mark_unchecked"
-                    android:layout_centerVertical="true" />
+                    android:src="@drawable/ic_check_mark_unchecked" />
 
 
             </RelativeLayout>
@@ -702,10 +706,43 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:drawablePadding="10dp"
+                    android:fontFamily="@font/medium"
+                    android:text="@string/wallet"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_pay_wallet" />
+
+                <ImageView
+                    android:id="@+id/wallet_radio"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_check_mark_unchecked" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:drawablePadding="10dp"
                     android:fontFamily="@font/medium"
                     android:text="@string/cash"
                     android:textColor="@color/text_black"
@@ -718,9 +755,9 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:padding="10dp"
-                    android:src="@drawable/ic_check_mark_unchecked"
-                    android:layout_centerVertical="true" />
+                    android:src="@drawable/ic_check_mark_unchecked" />
 
 
             </RelativeLayout>

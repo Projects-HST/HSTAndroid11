@@ -462,7 +462,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             e.printStackTrace();
         }
 
-        Log.d(TAG, "Width :" + b.getWidth() + " Height :" + b.getHeight());
+//        Log.d(TAG, "Width :" + b.getWidth() + " Height :" + b.getHeight());
 
         destFile = new File(file, "img_" + mDateFormatter.format(new Date()).toString() + ".png");
         mActualFilePath = destFile.getPath();
@@ -719,6 +719,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             int requestCode,
             String permissions[],
             int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0

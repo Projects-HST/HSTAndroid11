@@ -4,7 +4,7 @@ public class OSAConstants {
 
     public static final String BASE_URL = "https://happysanztech.com/";
 
-    public static final String JOINT_URL = "shopping/";
+    public static final String JOINT_URL = "lilamore/";
 
     public static final String BUILD_URL = BASE_URL + JOINT_URL + "mobileapi/";
 

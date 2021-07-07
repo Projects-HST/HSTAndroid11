@@ -80,9 +80,6 @@ public class ShippingAddressActivity extends AppCompatActivity implements IServi
         next.setOnClickListener(this);
         recyclerAddList = (RecyclerView) findViewById(R.id.addList);
 
-        add.setOnClickListener(this);
-        next.setOnClickListener(this);
-
         serviceHelper = new ServiceHelper(this);
         serviceHelper.setServiceListener(this);
         progressDialogHelper = new ProgressDialogHelper(this);
@@ -187,10 +184,10 @@ public class ShippingAddressActivity extends AppCompatActivity implements IServi
             if (resStr.equalsIgnoreCase("setDefault")) {
                 Intent checkInt;
 //                if (resStr.equalsIgnoreCase("shippingAddress")) {
-                    checkInt = new Intent(this, MainActivity.class);
-                    checkInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(checkInt);
-                    finish();
+                checkInt = new Intent(this, MainActivity.class);
+                checkInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(checkInt);
+                finish();
 //                }
             }
         }
@@ -215,32 +212,12 @@ public class ShippingAddressActivity extends AppCompatActivity implements IServi
     public void onClick(View v) {
 
         if (v == add) {
-            if (PreferenceStorage.getUserId(this).isEmpty()) {
-                if (PreferenceStorage.getUserId(this).equalsIgnoreCase("")) {
-                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
-                    alertDialogBuilder.setTitle(R.string.login);
-                    alertDialogBuilder.setMessage(R.string.login_to_continue);
-                    alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface arg0, int arg1) {
-                        }
-                    });
-                    alertDialogBuilder.setNegativeButton(R.string.alert_button_cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    alertDialogBuilder.show();
-                } else {
-                    Intent addInt = new Intent(this, com.hst.osa_lilamore.activity.AddAddressActivity.class);
-                    startActivity(addInt);
-                }
-            }
+            Intent addInt = new Intent(this, com.hst.osa_lilamore.activity.AddAddressActivity.class);
+            startActivity(addInt);
+        }
 
-            if (v == next) {
-                setDefaultAddress();
-            }
+        if (v == next) {
+            setDefaultAddress();
         }
     }
 

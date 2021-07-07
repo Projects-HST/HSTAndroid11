@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
     private int mSelectedLoginMode = 0;
-    private String whichService = "", loginMethod = "number";
+    private String whichService = "", loginMethod = "email";
     private boolean isMobileLogin = true;
 
     private Button btnContinue;

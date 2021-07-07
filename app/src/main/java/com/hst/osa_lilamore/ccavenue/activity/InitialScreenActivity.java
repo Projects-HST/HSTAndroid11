@@ -87,7 +87,7 @@ public class InitialScreenActivity extends AppCompatActivity implements IService
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(getApplicationContext());
+                android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(getApplicationContext(), R.style.alertDialogueTheme);
                 alertDialogBuilder.setTitle("Payment");
                 alertDialogBuilder.setMessage("Are you sure you want to cancel your order?");
                 alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

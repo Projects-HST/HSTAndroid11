@@ -77,13 +77,13 @@ public class OrderHistoryActivity extends AppCompatActivity implements IServiceL
             transit.setBackground(null);
             transit.setTextColor(ContextCompat.getColor(this, R.color.text_black));
             delivered.setBackground(ContextCompat.getDrawable(this, R.drawable.btn_size_color));
-            delivered.setTextColor(ContextCompat.getColor(this, R.color.white));
+            delivered.setTextColor(ContextCompat.getColor(this, R.color.text_black));
             getOrderHistory("Delivered");
         } if (view == transit) {
             delivered.setBackground(null);
             delivered.setTextColor(ContextCompat.getColor(this, R.color.text_black));
             transit.setBackground(ContextCompat.getDrawable(this, R.drawable.btn_size_color));
-            transit.setTextColor(ContextCompat.getColor(this, R.color.white));
+            transit.setTextColor(ContextCompat.getColor(this, R.color.text_black));
             getOrderHistory("Transit");
         }
     }

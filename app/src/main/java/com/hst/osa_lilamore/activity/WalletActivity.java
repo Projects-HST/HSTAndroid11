@@ -185,7 +185,7 @@ public class WalletActivity extends AppCompatActivity implements IServiceListene
     public void onClick(View v) {
         if (v == addMoney) {
             if (PreferenceStorage.getUserId(this).equalsIgnoreCase("")) {
-                android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+                android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this, R.style.alertDialogueTheme);
                 alertDialogBuilder.setTitle(R.string.login);
                 alertDialogBuilder.setMessage(R.string.login_to_continue);
                 alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {

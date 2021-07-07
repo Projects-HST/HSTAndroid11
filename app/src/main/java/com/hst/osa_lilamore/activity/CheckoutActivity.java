@@ -44,10 +44,10 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
     private String paymentStatus = "";
     private TextView name, phone, address;
     private EditText promoCode;
-    private TextView checkPromo;
+    private TextView checkPromo, changeAddress;
     private TextView itemPrice, txtDelivery, deliveryPrice, offerPrice, totalPrice, reviewOrder;
-    private ImageView walletImg, codImg;
-    private boolean walletClick = false, codClick = false;
+    private ImageView walletImg, codImg, ccavenueImg;
+    private boolean walletClick = false, codClick = false, ccavClick = false;
     private int pos;
     AddressArrayList addressList;
     ArrayList<AddressList> addressArrayList = new ArrayList<>();
@@ -86,6 +86,12 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
 
         reviewOrder = (TextView) findViewById(R.id.review_order);
         reviewOrder.setOnClickListener(this);
+
+        changeAddress = (TextView) findViewById(R.id.change_address);
+        changeAddress.setOnClickListener(this);
+
+        ccavenueImg = (ImageView) findViewById(R.id.ccavenue_radio);
+        ccavenueImg.setOnClickListener(this);
 
         walletImg = (ImageView) findViewById(R.id.wallet_radio);
         walletImg.setOnClickListener(this);
@@ -377,36 +383,47 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
                 checkPromoCode();
             }
         }
+        if (view == ccavenueImg) {
+            assert ccavenueImg != null;
+            ccavenueImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_checked));
+            walletImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
+            codImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
+
+        }
         if (view == walletImg) {
             assert walletImg != null;
             if (walletClick) {
+                ccavenueImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
                 walletImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
+                codImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
                 walletClick = false;
                 removeWallet();
             } else {
                 walletImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_checked));
+                ccavenueImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
+                codImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
                 walletClick = true;
                 useWallet();
             }
         }
         if (view == codImg) {
             assert codImg != null;
-            if (walletClick) {
-                codImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
-                codClick = false;
-            } else {
-                codImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_checked));
-                codClick = true;
-            }
+            codImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_checked));
+            codClick = true;
+            walletImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
+            ccavenueImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_mark_unchecked));
         }
         if (view == reviewOrder) {
             Intent i = new Intent(this, ReviewOrderActivity.class);
             if (codClick) {
                 i.putExtra("payment", "COD");
             } else {
-
                 i.putExtra("payment", paymentStatus);
             }
+            startActivity(i);
+        }
+        if (view == changeAddress) {
+            Intent i = new Intent(this, ShippingAddressActivity.class);
             startActivity(i);
         }
     }
