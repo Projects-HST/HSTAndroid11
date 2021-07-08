@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar) findViewById(R.id.activity_toolbar);
         setSupportActionBar(toolbar);
 
+//        page = getIntent().getExtras().getString("page");
+
         serviceHelper = new ServiceHelper(this);
         serviceHelper.setServiceListener(this);
 
@@ -208,18 +210,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             name.setText(PreferenceStorage.getFullName(this));
             mailId.setText(PreferenceStorage.getEmail(this));
         }
-//        String profileImg = PreferenceStorage.getProfilePic()
-        if (OSAValidator.checkNullString(PreferenceStorage.getProfilePic(this)) && (!PreferenceStorage.getProfilePic(this).isEmpty())) {
-            Picasso.get().load(PreferenceStorage.getProfilePic(this)).into(profilePic);
-        } else {
-            profilePic.setImageResource(R.drawable.ic_profile);
-        }
-
-        if (OSAValidator.checkNullString(PreferenceStorage.getSocialNetworkProfileUrl(this)) &&
-                (!PreferenceStorage.getSocialNetworkProfileUrl(this).isEmpty())) {
-            Picasso.get().load(PreferenceStorage.getSocialNetworkProfileUrl(this)).into(profilePic);
-        } else {
-            profilePic.setImageResource(R.drawable.ic_profile);
+        String url = PreferenceStorage.getProfilePic(this);
+        String getSocialUrl = PreferenceStorage.getSocialNetworkProfileUrl(this);
+        if (((url != null) && !(url.isEmpty()))) {
+            Picasso.get().load(url).placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile).into(profilePic);
+        } else if (((getSocialUrl != null) && !(getSocialUrl.isEmpty()))) {
+            Picasso.get().load(getSocialUrl).placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile).into(profilePic);
         }
 
         sideDash = navigationView.getHeaderView(0).findViewById(R.id.side_dashboard);
@@ -232,6 +230,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sideSettings = navigationView.getHeaderView(0).findViewById(R.id.side_settings);
         sideLogout = navigationView.getHeaderView(0).findViewById(R.id.side_logout);
 
+        if (((PreferenceStorage.getFullName(this).equalsIgnoreCase(""))&&
+                (PreferenceStorage.getFullName(this).isEmpty()))){
+            sideLogout.setVisibility(View.GONE);
+        }else {
+            sideLogout.setVisibility(View.VISIBLE);
+        }
+
         sideDash.setOnClickListener(this);
         sideProfile.setOnClickListener(this);
         sideCat.setOnClickListener(this);
@@ -243,7 +248,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sideLogout.setOnClickListener(this);
 
         changePage(0);
-
     }
 
 //    @Override

@@ -163,6 +163,7 @@ public class OSAConstants {
     public static final String KEY_REVIEW_ID = "review_id";
     public static final String KEY_COMMENT = "comments";
     public static String KEY_RATING = "rating";
+    public static final String KEY_PROFILE_STATE = "profile_state";
 
     //      Replace Params
     public static final String KEY_QUESTION_ID = "reason_question_id";
@@ -184,6 +185,7 @@ public class OSAConstants {
     public static String KEY_GENDER = "gender";
     public static String KEY_EMAIL = "email";
     public static String KEY_USER_PROFILE_PIC = "picture_url";
+    public static String KEY_USER_PIC = "profile_picture";
     public static String KEY_MOBILE_NO = "mobile_no";
     public static String KEY_VERSION = "version_code";
     public static String VERSION_VALUE = "1";

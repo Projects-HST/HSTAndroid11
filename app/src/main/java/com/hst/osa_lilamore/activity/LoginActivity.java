@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -36,6 +37,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -61,11 +63,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, IServiceListener,
-        DialogClickListener, GoogleApiClient.OnConnectionFailedListener {
+        DialogClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = LoginActivity.class.getName();
 
-    private TextView btnFacebook, btnGoogle, txtUseEmail, txtUseNumber, txtSignUp, forgotPassword;
+    private TextView btnFacebook, btnGoogle, txtUseEmail, txtUseNumber, txtSignUp, forgotPassword, btnContinue;
     private TextInputLayout tiNumber, tiEmail, tiPassword;
     private ServiceHelper serviceHelper;
     private ProgressDialogHelper progressDialogHelper;
@@ -78,7 +80,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String whichService = "", loginMethod = "number";
     private boolean isMobileLogin = true;
 
-    private Button btnContinue;
     private EditText txtNumber, txtEmail, txtPassword;
 
     private RelativeLayout layoutNumber, layoutEmail;
@@ -162,6 +163,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .enableAutoManage(this, this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
+
 
         serviceHelper = new ServiceHelper(this);
         serviceHelper.setServiceListener(this);
@@ -201,19 +207,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         if (v == btnContinue) {
-            if (loginMethod.equalsIgnoreCase("number")) {
-                if (validateFields()) {
-                    PreferenceStorage.saveMobileNo(this, txtNumber.getText().toString());
-                    continueWithNumber();
-                }
-            } else {
+//            if (loginMethod.equalsIgnoreCase("number")) {
+//                if (validateFields()) {
+//                    PreferenceStorage.saveMobileNo(this, txtNumber.getText().toString());
+//                    continueWithNumber();
+//                }
+//            } else {
                 if (validateFieldEmail()) {
                     PreferenceStorage.saveEmail(this, txtEmail.getText().toString());
                     continueWithEmail();
-                }
+//                }
             }
         }
         if (v == btnGoogle) {
+            mSelectedLoginMode = OSAConstants.GOOGLE_PLUS;
+            PreferenceStorage.saveLoginMode(this, mSelectedLoginMode);
             signIn();
         }
         if (v == btnFacebook) {
@@ -222,16 +230,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //            mSelectedLoginMode = OSAConstants.FACEBOOK;
             facebookLogin();
         }
-        if (v == txtUseEmail) {
-            loginMethod = "email";
-            layoutEmail.setVisibility(View.VISIBLE);
-            layoutNumber.setVisibility(View.GONE);
-        }
-        if (v == txtUseNumber) {
-            loginMethod = "number";
-            layoutEmail.setVisibility(View.GONE);
-            layoutNumber.setVisibility(View.VISIBLE);
-        }
+//        if (v == txtUseEmail) {
+//            loginMethod = "email";
+//            layoutEmail.setVisibility(View.VISIBLE);
+//            layoutNumber.setVisibility(View.GONE);
+//        }
+//        if (v == txtUseNumber) {
+//            loginMethod = "number";
+//            layoutEmail.setVisibility(View.GONE);
+//            layoutNumber.setVisibility(View.VISIBLE);
+//        }
         if (v == txtSignUp) {
             Intent i = new Intent(getApplicationContext(), com.hst.osa_lilamore.activity.SignupActivity.class);
             i.putExtra("page", page);
@@ -379,8 +387,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
 //    private void handleSignInResult(GoogleSignInResult completedTask){
+//        if (completedTask.isSuccess()) {
+        GoogleSignInAccount account = null;
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            account = completedTask.getResult(ApiException.class);
+//            GoogleSignInAccount account = completedTask.getSignInAccount();
 //            String name = "" + account.getDisplayName();
             String first = "" + account.getGivenName();
             String last = "" + account.getFamilyName();
@@ -409,14 +420,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String serverURL = OSAConstants.BUILD_URL + OSAConstants.FB_GPLUS_LOGIN;
             serviceHelper.makeGetServiceCall(jsonObject.toString(), serverURL);
             // Signed in successfully, show authenticated UI.
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-        }
-//        catch (Exception e){
-//            e.printStackTrace();
 //        }
+//        else {
+//            AlertDialogHelper.showAlertDialogForFragment(this, this, getString(R.string.error_occurred), R.style.alertDialogueTheme);
+//        }
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
     }
 
     public void facebookLogin() {
@@ -696,6 +706,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onConnected(@Nullable @org.jetbrains.annotations.Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
 
     }
 }

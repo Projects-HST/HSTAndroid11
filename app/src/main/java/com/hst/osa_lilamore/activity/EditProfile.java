@@ -11,10 +11,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -102,6 +105,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     private String mailId;
     private String gender;
     private String profile_image;
+    private String checkProfileState = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,31 +119,40 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(EditProfile.this, MainActivity.class));
                 finish();
             }
         });
 
 //        page = getIntent().getExtras().getString("page");
 
-        profileImage = (ImageView) findViewById(R.id.proPic);
-        profileImage.setOnClickListener(this);
-        profileName = (TextInputEditText) findViewById(R.id.txt_name);
-        profilePhone = (TextInputEditText) findViewById(R.id.txt_mobile_number);
-        profileMail = (TextInputEditText) findViewById(R.id.txt_mail);
         saveProfile = (TextView) findViewById(R.id.update);
         saveProfile.setOnClickListener(this);
 
-        String imgUrl = PreferenceStorage.getProfilePic(this);
-        if (((imgUrl != null) && !(imgUrl.isEmpty()))) {
-            Picasso.get().load(imgUrl).placeholder(R.drawable.ic_profile)
+//        checkProfileState = PreferenceStorage.getProfileUpdate(this);
+        profileImage = (ImageView) findViewById(R.id.proPic);
+        profileImage.setOnClickListener(this);
+        String url = PreferenceStorage.getProfilePic(this);
+        String getSocialUrl = PreferenceStorage.getSocialNetworkProfileUrl(this);
+        if (((url != null) && !(url.isEmpty()))) {
+            Picasso.get().load(url).placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile).into(profileImage);
+        } else if (((getSocialUrl != null) && !(getSocialUrl.isEmpty()))) {
+            Picasso.get().load(getSocialUrl).placeholder(R.drawable.ic_profile)
                     .error(R.drawable.ic_profile).into(profileImage);
         }
-
-//        if (PreferenceStorage.getName(this).equalsIgnoreCase("")) {
-//            profileName.setText("");
-//        } else {
-//            profileName.setText(PreferenceStorage.getName(this));
-//        }
+        profileName = (TextInputEditText) findViewById(R.id.txt_name);
+        if (PreferenceStorage.getFullName(this) != null) {
+            profileName.setText(PreferenceStorage.getFullName(this));
+        }
+        profileMail = (TextInputEditText) findViewById(R.id.txt_mail);
+        if (PreferenceStorage.getEmail(this) != null) {
+            profileMail.setText(PreferenceStorage.getEmail(this));
+        }
+        profilePhone = (TextInputEditText) findViewById(R.id.txt_mobile_number);
+        if (PreferenceStorage.getPhoneNo(this) != null) {
+            profilePhone.setText(PreferenceStorage.getPhoneNo(this));
+        }
 
         mDateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
@@ -182,7 +195,6 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     private boolean validateFields() {
 
         if (!OSAValidator.checkNullString(this.profileName.getText().toString().trim())) {
-
             profileName.setError(getString(R.string.empty_entry));
             reqFocus(profileName);
             return false;
@@ -267,11 +279,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         mailId = profileMail.getText().toString().trim();
         PreferenceStorage.saveEmail(this, mailId);
 
-
         if (validateFields()) {
-
             JSONObject jsonObject = new JSONObject();
-
             try {
                 jsonObject.put(OSAConstants.KEY_USER_ID, userId);
                 jsonObject.put(OSAConstants.PARAMS_FIRST_NAME, fullName);
@@ -300,7 +309,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
         if (!root.exists()) {
             if (!root.mkdirs()) {
-                Log.d(TAG, "Failed to create directory for storing images");
+                d(TAG, "Failed to create directory for storing images");
                 return;
             }
         }
@@ -315,10 +324,10 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         final File sdImageMainDirectory = new File(root.getPath() + File.separator + fname);
         destFile = sdImageMainDirectory;
         outputFileUri = Uri.fromFile(sdImageMainDirectory);
-        Log.d(TAG, "camera output Uri" + outputFileUri);
+        d(TAG, "camera output Uri" + outputFileUri);
 
         // Camera.
-        file = new File(Environment.getExternalStorageDirectory()
+        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                 + "/" + IMAGE_DIRECTORY);
         if (!file.exists()) {
             file.mkdirs();
@@ -333,6 +342,9 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
             intent.setPackage(packageName);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//                intent.putExtra(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION, outputFileUri);
+//            }
             cameraIntents.add(intent);
         }
 
@@ -462,7 +474,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             e.printStackTrace();
         }
 
-        Log.d(TAG, "Width :" + b.getWidth() + " Height :" + b.getHeight());
+//        Log.d(TAG, "Width :" + b.getWidth() + " Height :" + b.getHeight());
 
         destFile = new File(file, "img_" + mDateFormatter.format(new Date()).toString() + ".png");
         mActualFilePath = destFile.getPath();
@@ -496,6 +508,12 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                             == PackageManager.PERMISSION_DENIED) {
                         ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                                 MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE)
+                                == PackageManager.PERMISSION_DENIED) {
+                            ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE},
+                                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                        }
                     }
                     openImageIntent();
                 }
@@ -516,22 +534,22 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
                 if (resStr.equalsIgnoreCase("userDetails")) {
 
-
                     JSONObject object = response.getJSONObject("get_profile_details");
-
                     Log.d(TAG, object.toString());
+                    String userName = object.getString("first_name");
+                    String userPhone = object.getString("phone_number");
+                    String userMail = object.getString("email");
+                    String userPic = object.getString("profile_picture");
 
-                    fullName = PreferenceStorage.getFullName(this);
-                    phoneNo = PreferenceStorage.getPhoneNo(this);
-                    mailId = PreferenceStorage.getEmail(this);
-
-                    fullName = object.getString("first_name");
-                    profileName.setText(fullName);
-                    phoneNo = object.getString("phone_number");
-                    profilePhone.setText(phoneNo);
-                    mailId = object.getString("email");
-                    profileMail.setText(mailId);
-
+                    if ((userName != null) && !(userName.isEmpty()) && !userName.equalsIgnoreCase("null")){
+                        PreferenceStorage.saveFullName(this, userName);
+                    }if ((userPhone != null) && !(userPhone.isEmpty()) && !userPhone.equalsIgnoreCase("null")){
+                        PreferenceStorage.savePhoneNo(this, userPhone);
+                    }if ((userMail != null) && !(userMail.isEmpty()) && !userMail.equalsIgnoreCase("null")){
+                        PreferenceStorage.saveEmail(this, userMail);
+                    }if ((userPic != null) && !(userPic.isEmpty()) && !userPic.equalsIgnoreCase("null")){
+                        PreferenceStorage.saveProfilePic(this, userPic);
+                    }
                 }
 
                 if (resStr.equalsIgnoreCase("saveProfile")) {
@@ -715,10 +733,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     }
 
     @Override
-    public void onRequestPermissionsResult(
-            int requestCode,
-            String permissions[],
-            int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0
