@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity implements IServiceListe
 
     private String resStr;
     private boolean isMobile = false;
-   private ImageView passClick, abtClick, secClick, helpClick;
+    private ImageView passClick, abtClick, secClick, helpClick;
     private SwitchCompat subNotify, subNews;
     private RelativeLayout passWordLayout;
 

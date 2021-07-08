@@ -38,7 +38,21 @@ public class PreferenceStorage {
     }
     /*End*/
 
+    /*To check  user mode of login*/
+    public static void setProfileUpdate(Context context, String profileState) {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(OSAConstants.KEY_PROFILE_STATE, profileState);
+        editor.apply();
+    }
 
+    public static String getProfileUpdate(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        return sharedPreferences.getString(OSAConstants.KEY_PROFILE_STATE, "");
+    }
+    /*End*/
 
 
     /*To save FCM key locally*/
@@ -211,6 +225,25 @@ public class PreferenceStorage {
         return userId;
     }
     /*End*/
+
+//    // UserPic
+//    public static void saveUserPic(Context context, String userPic) {
+//        SharedPreferences sharedPreferences = PreferenceManager
+//                .getDefaultSharedPreferences(context);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(OSAConstants.KEY_USER_PIC, userPic);
+//        editor.apply();
+//    }
+//
+//    public static String getUserPic(Context context) {
+//        SharedPreferences sharedPreferences = PreferenceManager
+//                .getDefaultSharedPreferences(context);
+//        String userId;
+//        userId = sharedPreferences.getString(OSAConstants.KEY_USER_PIC, "");
+//        return userId;
+//    }
+//    /*End*/
+
 
     public static void saveSocialNetworkProfilePic(Context context, String url) {
         SharedPreferences sharedPreferences = PreferenceManager
