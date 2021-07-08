@@ -76,7 +76,7 @@ public class BestSellingListAdapter extends RecyclerView.Adapter<BestSellingList
                     pos = getAdapterPosition();
                     if (PreferenceStorage.getUserId(mContext).isEmpty()) {
                         if (PreferenceStorage.getUserId(mContext).equalsIgnoreCase("")) {
-                            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(mContext);
+                            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(mContext, R.style.alertDialogueTheme);
                             alertDialogBuilder.setTitle(R.string.login);
                             alertDialogBuilder.setMessage(R.string.login_to_continue);
                             alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {

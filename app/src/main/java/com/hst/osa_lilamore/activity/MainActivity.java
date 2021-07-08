@@ -401,9 +401,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             changePage(0);
         }
         if (view == sideProfile) {
-            Intent i = new Intent(this, com.hst.osa_lilamore.activity.EditProfile.class);
+            if (checkLogin()) {
+                Intent i = new Intent(this, com.hst.osa_lilamore.activity.EditProfile.class);
 //            i.putExtra("page", "editProfile");
-            startActivity(i);
+                startActivity(i);
+            }
         }
         if (view == sideCat) {
             Intent i = new Intent(this, com.hst.osa_lilamore.activity.CategoryActivity.class);
@@ -411,22 +413,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            changePage(1);
         }
         if (view == sideWish) {
-            Intent i = new Intent(this, com.hst.osa_lilamore.activity.WishListActivity.class);
-            startActivity(i);
+            if (checkLogin()) {
+                Intent i = new Intent(this, com.hst.osa_lilamore.activity.WishListActivity.class);
+                startActivity(i);
+            }
         }
         if (view == sideOrder) {
-            Intent i = new Intent(this, com.hst.osa_lilamore.activity.OrderHistoryActivity.class);
-            startActivity(i);
+            if (checkLogin()) {
+                Intent i = new Intent(this, com.hst.osa_lilamore.activity.OrderHistoryActivity.class);
+                startActivity(i);
+            }
         }
         if (view == sideWallet) {
-            Intent i = new Intent(this, com.hst.osa_lilamore.activity.WalletActivity.class);
-            startActivity(i);
+            if (checkLogin()) {
+                Intent i = new Intent(this, com.hst.osa_lilamore.activity.WalletActivity.class);
+                startActivity(i);
+            }
         }
         if (view == sideAddress) {
-            Intent i = new Intent(this, com.hst.osa_lilamore.activity.ShippingAddressActivity.class);
-            i.putExtra("page", "shippingAddress");
-            startActivity(i);
-
+            if (checkLogin()) {
+                Intent i = new Intent(this, com.hst.osa_lilamore.activity.ShippingAddressActivity.class);
+                i.putExtra("page", "shippingAddress");
+                startActivity(i);
+            }
         }
         if (view == sideSettings) {
             Intent i = new Intent(this, com.hst.osa_lilamore.activity.SettingsActivity.class);
@@ -434,6 +443,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (view == sideLogout) {
             logout();
+        }
+    }
+
+    private boolean checkLogin() {
+        if (PreferenceStorage.getUserId(this).isEmpty() || PreferenceStorage.getUserId(this).equalsIgnoreCase("")) {
+            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this, R.style.alertDialogueTheme);
+            alertDialogBuilder.setTitle(R.string.login);
+            alertDialogBuilder.setMessage(R.string.login_to_continue);
+            alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface arg0, int arg1) {
+                }
+            });
+            alertDialogBuilder.setNegativeButton(R.string.alert_button_cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alertDialogBuilder.show();
+            return false;
+        } else {
+            return true;
         }
     }
 

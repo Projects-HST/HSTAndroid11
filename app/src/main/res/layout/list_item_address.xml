@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
     android:layout_marginVertical="10dp"
-    android:background="@color/transparent"
     android:orientation="vertical">
 
     <LinearLayout
@@ -20,6 +19,7 @@
             android:layout_marginStart="5dp"
             android:text="@string/address1"
             android:fontFamily="@font/regular"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_weight="0.9"/>
 
@@ -43,7 +43,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_list_white"
+        android:background="@drawable/shadow_round"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -55,7 +56,7 @@
             android:fontFamily="@font/regular"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/cusAddress2"
@@ -67,7 +68,7 @@
             android:fontFamily="@font/regular"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/cityName"
@@ -92,7 +93,7 @@
             android:layout_toEndOf="@id/cityName"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/mobNum"
@@ -104,7 +105,7 @@
             android:layout_marginStart="5dp"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <View
             android:id="@+id/horView"
@@ -127,7 +128,8 @@
                 android:layout_weight="0.495"
                 android:textColor="@color/black"
                 android:fontFamily="@font/semibold"
-                android:background="@drawable/grey_bg_btn"
+                android:textSize="16sp"
+                android:background="@drawable/btn_size"
                 android:gravity="center"
                 android:text="@string/btnEdit" />
 
@@ -144,7 +146,8 @@
                 android:layout_height="40dp"
                 android:layout_weight="0.495"
                 android:fontFamily="@font/semibold"
-                android:background="@drawable/grey_bg_btn"
+                android:background="@drawable/btn_size"
+                android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="@color/price_red"
                 android:text="@string/btnDelete" />

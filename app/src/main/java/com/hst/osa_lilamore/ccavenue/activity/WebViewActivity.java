@@ -192,7 +192,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     public void show_alert(String msg) {
         AlertDialog alertDialog = new AlertDialog.Builder(
-                WebViewActivity.this).create();
+                WebViewActivity.this, R.style.alertDialogueTheme).create();
 
         alertDialog.setTitle("Error!!!");
         if (msg.contains("\n"))

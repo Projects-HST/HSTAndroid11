@@ -469,7 +469,7 @@ public class AddAddressActivity extends AppCompatActivity implements IServiceLis
         }
 
         if (!enable_gps && !enable_network) {
-            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this, R.style.alertDialogueTheme);
             alertDialogBuilder.setTitle(R.string.title_location_permission);
             alertDialogBuilder.setMessage(R.string.text_location_permission);
             alertDialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
@@ -513,7 +513,7 @@ public class AddAddressActivity extends AppCompatActivity implements IServiceLis
     }
 
     private void showDialog() {
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this, R.style.alertDialogueTheme);
         alertDialogBuilder.setTitle("Location");
         alertDialogBuilder.setMessage(R.string.empty_address);
         alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {

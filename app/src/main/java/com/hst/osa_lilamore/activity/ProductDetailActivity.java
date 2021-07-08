@@ -652,7 +652,7 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
         if (view == addCart) {
             if (PreferenceStorage.getUserId(this).isEmpty()) {
                 if (PreferenceStorage.getUserId(this).equalsIgnoreCase("")) {
-                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this, R.style.alertDialogueTheme);
                     alertDialogBuilder.setTitle(R.string.login);
                     alertDialogBuilder.setMessage(R.string.login_to_continue);
                     alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {
@@ -676,7 +676,7 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
         if (view == imgLike) {
             if (PreferenceStorage.getUserId(this).isEmpty()) {
                 if (PreferenceStorage.getUserId(this).equalsIgnoreCase("")) {
-                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this, R.style.alertDialogueTheme);
                     alertDialogBuilder.setTitle(R.string.login);
                     alertDialogBuilder.setMessage(R.string.login_to_continue);
                     alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {
@@ -719,7 +719,7 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
 
     public boolean checkLogin() {
         if (PreferenceStorage.getUserId(this).equalsIgnoreCase("") || PreferenceStorage.getUserId(this).isEmpty()) {
-            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this, R.style.alertDialogueTheme);
             alertDialogBuilder.setTitle(R.string.login);
             alertDialogBuilder.setMessage(R.string.login_to_continue);
             alertDialogBuilder.setPositiveButton(R.string.alert_button_ok, new DialogInterface.OnClickListener() {

@@ -116,7 +116,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(mContext);
+                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(mContext, R.style.alertDialogueTheme);
                     alertDialogBuilder.setTitle(R.string.title_delete);
                     alertDialogBuilder.setMessage(R.string.txt_delete);
                     alertDialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {

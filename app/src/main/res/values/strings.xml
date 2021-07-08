@@ -157,6 +157,7 @@
     <string name="card_name">Name on Card</string>
     <string name="card_expiry">Expiry date</string>
     <string name="card_cvv">CVV (Look at the back)</string>
+    <string name="avenue">CC Avenue</string>
     <string name="debit_card">Debit Card</string>
     <string name="upi">UPI</string>
     <string name="wallet">Wallet</string>
