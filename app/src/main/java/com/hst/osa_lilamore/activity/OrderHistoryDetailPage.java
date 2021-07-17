@@ -253,6 +253,7 @@ public class OrderHistoryDetailPage extends AppCompatActivity implements IServic
                     String streetString = data.getString("street");
                     String cityString = data.getString("city");
                     String pincodeString = data.getString("pincode");
+                    String orderStatus = data.getString("order_status");
 
                     String itemString = data.getString("total_amount");
                     String promoString = data.getString("promo_amount");
@@ -290,6 +291,9 @@ public class OrderHistoryDetailPage extends AppCompatActivity implements IServic
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
                     recyclerViewCategory.setLayoutManager(mLayoutManager);
                     recyclerViewCategory.setAdapter(mAdapter);
+                    if (orderStatus.equalsIgnoreCase("Delivered")) {
+                        findViewById(R.id.review_layout).setVisibility(View.GONE);
+                    }
 
                 }
                 if (resCheck.equalsIgnoreCase("check")) {

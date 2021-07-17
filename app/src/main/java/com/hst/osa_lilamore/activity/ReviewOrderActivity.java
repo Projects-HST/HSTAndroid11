@@ -267,7 +267,7 @@ public class ReviewOrderActivity extends AppCompatActivity implements IServiceLi
             startActivity(homeIntent);
             finish();
         } if (view == goToOrders) {
-            Intent homeIntent = new Intent(this, OrderHistory.class);
+            Intent homeIntent = new Intent(this, OrderHistoryActivity.class);
             homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(homeIntent);
             finish();

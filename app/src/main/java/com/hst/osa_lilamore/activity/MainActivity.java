@@ -140,14 +140,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSearchView.setIconified(false);
+//                mSearchView.setIconified(false);
                 mainLay.setVisibility(View.GONE);
                 recentSearchLay.setVisibility(View.VISIBLE);
                 getRecentSearch();
             }
         });
-
-        mSearchView.setQueryHint("What are you looking");
+        String suggestWord = "What are you looking for?";
+//        mSearchView.setQuery(suggestWord, false);
+        mSearchView.setQueryHint(suggestWord);
+        mSearchView.clearFocus();
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

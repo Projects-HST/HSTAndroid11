@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
     android:layout_marginVertical="10dp"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -43,7 +44,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shadow_round"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
@@ -51,7 +51,6 @@
             android:id="@+id/cusAddress1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="5dp"
             android:fontFamily="@font/regular"
             android:text="@string/address1"
@@ -64,7 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cusAddress1"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/regular"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
@@ -76,11 +74,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cusAddress2"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/regular"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/pinCode"
@@ -88,7 +85,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cusAddress2"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/regular"
             android:layout_toEndOf="@id/cityName"
             android:text="@string/address1"
@@ -100,25 +96,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/pinCode"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/regular"
             android:layout_marginStart="5dp"
             android:text="@string/address1"
             android:textColor="@color/txt_grey"
             android:textSize="14sp" />
 
-        <View
-            android:id="@+id/horView"
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/lite_grey"
-            android:layout_below="@id/mobNum" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/horView"
+            android:layout_below="@id/mobNum"
             android:orientation="horizontal">
 
             <TextView
@@ -129,15 +116,9 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/semibold"
                 android:textSize="16sp"
-                android:background="@drawable/btn_size"
+                android:background="@drawable/btn_square"
                 android:gravity="center"
                 android:text="@string/btnEdit" />
-
-            <View
-                android:layout_width="0.1dp"
-                android:layout_height="40dp"
-                android:layout_weight="0.001"
-                android:background="@color/lite_grey" />
 
 
             <TextView
@@ -146,7 +127,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="0.495"
                 android:fontFamily="@font/semibold"
-                android:background="@drawable/btn_size"
+                android:background="@drawable/btn_square"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="@color/price_red"

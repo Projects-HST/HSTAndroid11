@@ -43,6 +43,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_margin="10dp"
                 android:background="@drawable/btn_round_light_broder"
                 android:orientation="vertical">
@@ -66,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                     android:paddingTop="10dp"
@@ -163,6 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:visibility="gone"
                 android:background="@drawable/btn_round_light_broder"
                 android:orientation="vertical">
 
@@ -260,6 +263,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_margin="10dp"
                 android:background="@drawable/btn_round_light_broder"
                 android:orientation="vertical">
@@ -412,6 +416,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/btn_square_border"
+                android:visibility="gone"
                 android:drawablePadding="20dp"
                 android:gravity="center"
                 android:paddingStart="40dp"
@@ -446,6 +451,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/btn_size_color"
+            android:visibility="gone"
             android:fontFamily="@font/medium"
             android:gravity="center"
             android:text="@string/track_order"

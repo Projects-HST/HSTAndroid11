@@ -76,7 +76,7 @@ public class ReviewOrderListAdapter extends RecyclerView.Adapter<ReviewOrderList
             txtProductName = (TextView) view.findViewById(R.id.product_name);
             txtProductPrice = (TextView) view.findViewById(R.id.product_price);
             txtProductMRP = (TextView) view.findViewById(R.id.product_mrp);
-            productQuantity = (TextView) view.findViewById(R.id.quantity);
+            productQuantity = (TextView) view.findViewById(R.id.product_quantity);
         }
 
         @Override
@@ -123,7 +123,7 @@ public class ReviewOrderListAdapter extends RecyclerView.Adapter<ReviewOrderList
         holder.txtProductPrice.setText("₹" + product.getprice());
 
 //        if(OSAValidator.checkNullString(product.getquantity())) {
-            holder.productQuantity.setText(product.getquantity());
+            holder.productQuantity.setText("Quantity: " + product.getquantity());
 //        }
 //        else {
 //            holder.productQuantity.setVisibility(View.GONE);

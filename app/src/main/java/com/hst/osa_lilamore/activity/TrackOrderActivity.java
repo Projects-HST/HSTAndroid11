@@ -49,7 +49,6 @@ public class TrackOrderActivity extends AppCompatActivity implements IServiceLis
     private ArrayList<OrderStatus> orderStatusArrayList = new ArrayList<>();
     OrderStatusList orderStatusList;
     private OrderStatusListAdapter mAdapter;
-    private RecyclerView recyclerViewStat;
 
     private ArrayList<CartItem> cartItemArrayList = new ArrayList<>();
     CartOrderList cartItemList;
@@ -172,11 +171,11 @@ public class TrackOrderActivity extends AppCompatActivity implements IServiceLis
                     JSONObject data = orderObjData.getJSONObject(0);
 
                     for (int i = 0; i < orderStatusArrayList.size(); i ++) {
-                        if (data.getString("old_status").equalsIgnoreCase(orderStatusArrayList.get(i).getorder_status())) {
+                        if (data.getString("status").equalsIgnoreCase(orderStatusArrayList.get(i).getorder_status())) {
                             int position = i;
                             for (int j = 0; j <= position; j++) {
                                 orderStatusArrayList.get(j).setstatus("1");
-                                recyclerViewStat.getAdapter().notifyDataSetChanged();
+                                recyclerViewCategory.getAdapter().notifyDataSetChanged();
                             }
                         }
                     }
@@ -191,8 +190,8 @@ public class TrackOrderActivity extends AppCompatActivity implements IServiceLis
                     }
                     mAdapter = new OrderStatusListAdapter(this, orderStatusArrayList,this);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-                    recyclerViewStat.setLayoutManager(mLayoutManager);
-                    recyclerViewStat.setAdapter(mAdapter);
+                    recyclerViewCategory.setLayoutManager(mLayoutManager);
+                    recyclerViewCategory.setAdapter(mAdapter);
                     trackOrder();
                 }
 

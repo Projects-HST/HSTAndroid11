@@ -6,16 +6,16 @@
   <path
       android:pathData="M64.962,64.962m-64.962,0a64.962,64.962 0,1 1,129.924 0a64.962,64.962 0,1 1,-129.924 0"
       android:strokeAlpha="0.04"
-      android:fillColor="#bd0621"
+      android:fillColor="#EF7571"
       android:fillAlpha="0.04"/>
   <path
       android:pathData="M64.962,64.962m-55.682,0a55.682,55.682 0,1 1,111.364 0a55.682,55.682 0,1 1,-111.364 0"
       android:strokeAlpha="0.18"
-      android:fillColor="#bd0621"
+      android:fillColor="#EF7571"
       android:fillAlpha="0.18"/>
   <path
       android:pathData="M64.961,18.561A46.4,46.4 0,1 1,18.561 64.961,46.4 46.4,0 0,1 64.961,18.561Z"
-      android:fillColor="#bd0621"/>
+      android:fillColor="#EF7571"/>
   <path
       android:pathData="M76.005,59.859a2.361,2.361 0,0 1,3.23 0,2.112 2.112,0 0,1 0,3.084l-13.7,13.085a2.361,2.361 0,0 1,-3.23 0L54.69,68.759a2.112,2.112 0,0 1,0 -3.084,2.361 2.361,0 0,1 3.23,0l6,5.727Z"
       android:fillColor="#fff"/>
