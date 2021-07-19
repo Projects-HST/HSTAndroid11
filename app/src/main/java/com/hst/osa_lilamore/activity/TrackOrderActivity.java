@@ -183,7 +183,6 @@ public class TrackOrderActivity extends AppCompatActivity implements IServiceLis
 
                 } if (resCheck.equalsIgnoreCase("track_status")) {
                     Gson gson = new Gson();
-
                     orderStatusList = gson.fromJson(response.toString(), OrderStatusList.class);
                     orderStatusArrayList.addAll(orderStatusList.getOrderStatusArrayList());
                     for (int i = 0; i < orderStatusArrayList.size(); i ++) {

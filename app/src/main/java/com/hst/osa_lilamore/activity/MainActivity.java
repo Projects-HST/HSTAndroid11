@@ -181,22 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        if (PreferenceStorage.getName(this).equalsIgnoreCase("") || PreferenceStorage.getName(this).isEmpty()) {
-            name.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //What to do on back clicked
-                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                    i.putExtra("page", "dash");
-                    startActivity(i);
-                }
-            });
-        } else {
-            name.setText(PreferenceStorage.getName(this));
-            mailId.setText(PreferenceStorage.getEmail(this));
-        }
-
-        if (PreferenceStorage.getFullName(this).equalsIgnoreCase("") || PreferenceStorage.getFullName(this).isEmpty()) {
+        if (PreferenceStorage.getUserId(this).equalsIgnoreCase("") || PreferenceStorage.getUserId(this).isEmpty()) {
             name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -210,16 +195,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             name.setText(PreferenceStorage.getFullName(this));
             mailId.setText(PreferenceStorage.getEmail(this));
         }
-        String url = PreferenceStorage.getProfilePic(this);
-        String getSocialUrl = PreferenceStorage.getSocialNetworkProfileUrl(this);
-        if (((url != null) && !(url.isEmpty()))) {
-            Picasso.get().load(url).placeholder(R.drawable.ic_profile)
-                    .error(R.drawable.ic_profile).into(profilePic);
-        } else if (((getSocialUrl != null) && !(getSocialUrl.isEmpty()))) {
-            Picasso.get().load(getSocialUrl).placeholder(R.drawable.ic_profile)
-                    .error(R.drawable.ic_profile).into(profilePic);
-        }
 
+//        if (PreferenceStorage.getFullName(this).equalsIgnoreCase("") || PreferenceStorage.getFullName(this).isEmpty()) {
+//            name.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    //What to do on back clicked
+//                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+//                    i.putExtra("page", "dash");
+//                    startActivity(i);
+//                }
+//            });
+//        } else {
+//            name.setText(PreferenceStorage.getFullName(this));
+//            mailId.setText(PreferenceStorage.getEmail(this));
+//        }
+        if ((PreferenceStorage.getUserId(this) != null)){
+            String url = PreferenceStorage.getProfilePic(this);
+            String getSocialUrl = PreferenceStorage.getSocialNetworkProfileUrl(this);
+            if (((url != null) && !(url.isEmpty()))) {
+                Picasso.get().load(url).placeholder(R.drawable.ic_profile)
+                        .error(R.drawable.ic_profile).into(profilePic);
+            } else if (((getSocialUrl != null) && !(getSocialUrl.isEmpty()))) {
+                Picasso.get().load(getSocialUrl).placeholder(R.drawable.ic_profile)
+                        .error(R.drawable.ic_profile).into(profilePic);
+            }
+        }
         sideDash = navigationView.getHeaderView(0).findViewById(R.id.side_dashboard);
         sideProfile = navigationView.getHeaderView(0).findViewById(R.id.side_profile);
         sideCat = navigationView.getHeaderView(0).findViewById(R.id.side_category);
@@ -230,8 +231,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sideSettings = navigationView.getHeaderView(0).findViewById(R.id.side_settings);
         sideLogout = navigationView.getHeaderView(0).findViewById(R.id.side_logout);
 
-        if (((PreferenceStorage.getFullName(this).equalsIgnoreCase(""))&&
-                (PreferenceStorage.getFullName(this).isEmpty()))){
+        if (((PreferenceStorage.getUserId(this).equalsIgnoreCase(""))&&
+                (PreferenceStorage.getUserId(this).isEmpty()))){
             sideLogout.setVisibility(View.GONE);
         }else {
             sideLogout.setVisibility(View.VISIBLE);

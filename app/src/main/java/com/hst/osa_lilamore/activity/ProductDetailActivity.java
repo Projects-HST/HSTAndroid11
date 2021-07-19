@@ -381,7 +381,7 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
                 } else if (resFor.equalsIgnoreCase("addWish")) {
                     likeClick = true;
                     imgLike.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_heart_filled));
-                } else if (resFor.equalsIgnoreCase("removeCart")) {
+                } else if (resFor.equalsIgnoreCase("removeWish")) {
                     likeClick = false;
                     imgLike.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_heart));
                 }

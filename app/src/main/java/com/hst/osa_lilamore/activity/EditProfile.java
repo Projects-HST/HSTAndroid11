@@ -1,7 +1,10 @@
 package com.hst.osa_lilamore.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,6 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +76,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.util.Log.d;
 
 public class EditProfile extends AppCompatActivity implements View.OnClickListener, IServiceListener,
@@ -94,7 +104,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     private String page;
     public static final String DATE_FORMAT = "yyyyMMdd_HHmmss";
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
-
+    public String[] permission = {CAMERA, READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE};
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
     private ImageView profileImage;
     private TextView saveProfile;
@@ -119,7 +130,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditProfile.this, MainActivity.class));
+//                startActivity(new Intent(SampleEditProfileActivity.this, MainActivity.class));
                 finish();
             }
         });
@@ -298,12 +309,10 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-
     private void openImageIntent() {
 
 // Determine Uri of camera image to save.
-        File pictureFolder = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);
+        File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         final File root = new File(pictureFolder, "OSAImages");
 //        final File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyDir");
 
@@ -327,8 +336,13 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         d(TAG, "camera output Uri" + outputFileUri);
 
         // Camera.
-        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                + "/" + IMAGE_DIRECTORY);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    + "/" + IMAGE_DIRECTORY);
+        } else {
+            file = new File(Environment.getExternalStorageDirectory()
+                    + "/" + IMAGE_DIRECTORY);
+        }
         if (!file.exists()) {
             file.mkdirs();
         }
@@ -342,9 +356,6 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
             intent.setPackage(packageName);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//                intent.putExtra(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION, outputFileUri);
-//            }
             cameraIntents.add(intent);
         }
 
@@ -360,6 +371,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toArray(new Parcelable[cameraIntents.size()]));
 
         startActivityForResult(chooserIntent, REQUEST_IMAGE_GET);
+
     }
 
     @Override
@@ -367,9 +379,9 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-
             if (requestCode == REQUEST_IMAGE_GET) {
                 Log.d(TAG, "ONActivity Result");
+
                 final boolean isCamera;
                 if (data == null) {
                     Log.d(TAG, "camera is true");
@@ -494,32 +506,17 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
         if (v == profileImage) {
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                    == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-            } else {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (checkPermission()) {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                         == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-                } else {
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_DENIED) {
-                        ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE)
-                                == PackageManager.PERMISSION_DENIED) {
-                            ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE},
-                                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-                        }
-                    }
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }else {
                     openImageIntent();
                 }
+            } else {
+                requestPermission();
             }
         }
-
         if (v == saveProfile) {
             saveProfileData();
         }
@@ -541,13 +538,16 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                     String userMail = object.getString("email");
                     String userPic = object.getString("profile_picture");
 
-                    if ((userName != null) && !(userName.isEmpty()) && !userName.equalsIgnoreCase("null")){
+                    if ((userName != null) && !(userName.isEmpty()) && !userName.equalsIgnoreCase("null")) {
                         PreferenceStorage.saveFullName(this, userName);
-                    }if ((userPhone != null) && !(userPhone.isEmpty()) && !userPhone.equalsIgnoreCase("null")){
+                    }
+                    if ((userPhone != null) && !(userPhone.isEmpty()) && !userPhone.equalsIgnoreCase("null")) {
                         PreferenceStorage.savePhoneNo(this, userPhone);
-                    }if ((userMail != null) && !(userMail.isEmpty()) && !userMail.equalsIgnoreCase("null")){
+                    }
+                    if ((userMail != null) && !(userMail.isEmpty()) && !userMail.equalsIgnoreCase("null")) {
                         PreferenceStorage.saveEmail(this, userMail);
-                    }if ((userPic != null) && !(userPic.isEmpty()) && !userPic.equalsIgnoreCase("null")){
+                    }
+                    if ((userPic != null) && !(userPic.isEmpty()) && !userPic.equalsIgnoreCase("null")) {
                         PreferenceStorage.saveProfilePic(this, userPic);
                     }
                 }
@@ -650,7 +650,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
                             mUpdatedImageUrl = resp.getString("picture_url");
                             if (mUpdatedImageUrl != null) {
-                                PreferenceStorage.saveProfilePic(EditProfile.this, mUpdatedImageUrl);
+                                PreferenceStorage.saveProfilePic(getApplicationContext(), mUpdatedImageUrl);
                             }
                             Log.d(TAG, "updated image url is" + mUpdatedImageUrl);
                             if (successVal.equalsIgnoreCase("success")) {
@@ -685,9 +685,9 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                 } else {
                     profileImage.setImageResource(R.drawable.ic_profile);
                 }
-                Toast.makeText(EditProfile.this, "Unable to upload picture", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Unable to upload picture", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(EditProfile.this, "Uploaded successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Uploaded successfully!", Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(getIntent());
             }
@@ -713,7 +713,6 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         try {
             String[] proj = {MediaStore.Images.Media.DATA};
             CursorLoader loader = new CursorLoader(context, contentUri, proj, null, null, null);
-
             Cursor cursor = loader.loadInBackground();
             if (cursor != null) {
                 int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -727,8 +726,37 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             result = null;
             Toast.makeText(this, "Was unable to save  image", Toast.LENGTH_SHORT).show();
 
-        } finally {
-            return result;
+//            }
+        }
+        return result;
+    }
+
+    public boolean checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return Environment.isExternalStorageManager();
+        } else {
+            int readCheck = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+            int writeCheck = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+            return readCheck == PackageManager.PERMISSION_GRANTED && writeCheck == PackageManager.PERMISSION_GRANTED;
+        }
+    }
+
+    public void requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                Intent reqInt = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                reqInt.addCategory(Intent.CATEGORY_DEFAULT);
+                reqInt.setData(Uri.parse(String.format("package:%s", getApplicationContext().getPackageName())));
+                startActivityForResult(reqInt, REQUEST_IMAGE_GET);
+
+            } catch (Exception e) {
+                Intent reqInt = new Intent();
+                reqInt.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(reqInt, REQUEST_IMAGE_GET);
+
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, permission, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
         }
     }
 
@@ -737,13 +765,12 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openImageIntent();
-//                    Toast.makeText(ProfileActivity.this, "Permission Granted!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(EditProfile.this, "Permission Denied!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Permission Denied!", Toast.LENGTH_SHORT).show();
                 }
+                break;
         }
     }
 }
