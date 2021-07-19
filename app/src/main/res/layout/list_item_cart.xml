@@ -70,7 +70,7 @@
                         android:ellipsize="end"
                         android:fontFamily="@font/semibold"
                         android:text="Rs.1000"
-                        android:textColor="@color/black"
+                        android:textColor="@color/price_red"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 

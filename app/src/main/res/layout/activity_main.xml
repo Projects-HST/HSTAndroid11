@@ -39,9 +39,13 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:focusedByDefault="false"
+                android:focusableInTouchMode="true"
                 android:clickable="true"
-                android:background="@drawable/btn_oval_white"
-                app:iconifiedByDefault="true" />
+                app:queryHint="What are you looking for?"
+                app:defaultQueryHint="What are you looking for?"
+                app:iconifiedByDefault="false"
+                android:background="@drawable/btn_oval_white" />
 
         </RelativeLayout>
 

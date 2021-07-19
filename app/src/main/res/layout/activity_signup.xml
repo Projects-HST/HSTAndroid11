@@ -168,13 +168,16 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
 
-                        <Button
+                        <TextView
                             android:id="@+id/btn_signup"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/signin_txt_box"
                             android:layout_marginHorizontal="20dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="40dp"
+                            android:background="@drawable/btn_bg"
                             android:fontFamily="@font/semibold"
+                            android:gravity="center"
                             android:text="@string/signUp"
                             android:textAllCaps="false"
                             android:textColor="@color/black"

@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/semibold"
                         android:text="Rs.1000"
-                        android:textColor="@color/black"
+                        android:textColor="@color/price_red"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical"
                         android:text="@string/replacement"
-                        android:textColor="@color/txt_red"
+                        android:textColor="@color/txt_red_return"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:drawableEndCompat="@drawable/ic_right_arrow" />

@@ -11,7 +11,7 @@
         android:id="@+id/order_played_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="10dp"
+        
         android:visibility="gone"
         android:background="@color/foreground_grey">
 
@@ -43,10 +43,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/light"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/regular"
                 android:gravity="center_horizontal"
                 android:text="@string/order_placed_success"
                 android:textColor="@color/text_grey_wallet"
@@ -62,12 +62,11 @@
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/btn_size_color"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/semibold"
                 android:gravity="center"
                 android:text="@string/continue_shopping"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/go_to_orders"
@@ -76,12 +75,12 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/semibold"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
                 android:text="@string/go_orders"
                 android:textColor="@color/line_plus_minus"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -102,6 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/review_layout"
+        android:background="@color/background_grey"
         android:layout_below="@id/activity_toolbar">
 
         <LinearLayout
@@ -115,12 +115,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
+                
+                android:background="@drawable/btn_square"
                 android:padding="1dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:fontFamily="@font/semibold"
                 android:layout_marginTop="10dp"
                 android:text="@string/your_delivery"
                 android:textColor="@color/text_black"
@@ -130,7 +133,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/white"
+                android:background="@drawable/btn_square"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -138,21 +143,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/regular"
                     android:textColor="@color/text_black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/regular"
                     android:textColor="@color/text_black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/address"
@@ -203,6 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/semibold"
                 android:text="@string/payment_method"
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
@@ -212,7 +215,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:background="@color/white"
+                
+                android:background="@drawable/btn_square"
                 android:orientation="vertical"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp">
@@ -231,8 +235,6 @@
 
 
     </ScrollView>
-
-
 
     <RelativeLayout
         android:id="@+id/review_layout"
@@ -318,6 +320,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/semibold"
             android:text="@string/total"
             android:textColor="@color/text_black"
@@ -344,12 +347,11 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/btn_size_color"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/semibold"
             android:gravity="center"
             android:text="@string/place_order"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"/>
 
     </RelativeLayout>
 

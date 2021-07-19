@@ -257,7 +257,7 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
                     getOrderDetails();
                 }
                 if (resCheck.equalsIgnoreCase("detail")) {
-                    JSONArray orderObjData = response.getJSONArray("cart_items");
+                    JSONArray orderObjData = response.getJSONArray("order_details");
 
                     JSONObject data = orderObjData.getJSONObject(0);
                     purchaseOrderID = data.getString("purchase_order_id");
