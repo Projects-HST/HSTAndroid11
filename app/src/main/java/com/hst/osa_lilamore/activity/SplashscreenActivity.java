@@ -38,11 +38,11 @@ public class SplashscreenActivity extends AppCompatActivity {
                 Boolean b = PreferenceStorage.isFirstTimeLaunch(getApplicationContext());
                 String id = PreferenceStorage.getUserId(getApplicationContext());
                 if (getStatus != 0 && OSAValidator.checkNullString(id)) {
-                    Intent i = new Intent(SplashscreenActivity.this, com.hst.osa_lilamore.activity.MainActivity.class);
+                    Intent i = new Intent(SplashscreenActivity.this, com.hst.osa_lilamore.activity.AddAddressActivity.class);
                     startActivity(i);
                     finish();
                 } else {
-                    Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
+                    Intent i = new Intent(getApplicationContext(), AddAddressActivity.class);
                     FirebaseMessaging.getInstance().getToken()
                             .addOnCompleteListener(new OnCompleteListener<String>() {
                                 @Override

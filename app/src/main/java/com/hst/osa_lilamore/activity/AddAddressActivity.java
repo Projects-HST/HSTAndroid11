@@ -2,6 +2,7 @@ package com.hst.osa_lilamore.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,7 +31,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.tasks.CancellationToken;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.bean.support.AddressList;
@@ -43,6 +49,7 @@ import com.hst.osa_lilamore.utils.OSAConstants;
 import com.hst.osa_lilamore.utils.OSAValidator;
 import com.hst.osa_lilamore.utils.PreferenceStorage;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -169,7 +176,7 @@ public class AddAddressActivity extends AppCompatActivity implements IServiceLis
             pinCode.setText(postalCode);
             defaultAddress.setVisibility(View.GONE);
         }
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         checkPermissions();
     }
@@ -459,29 +466,30 @@ public class AddAddressActivity extends AppCompatActivity implements IServiceLis
             }
         }
     }
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
 
     private void getCurrentLocation() {
-        try {
-            enable_gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            enable_network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if (!enable_gps && !enable_network) {
-            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this, R.style.alertDialogueTheme);
-            alertDialogBuilder.setTitle(R.string.title_location_permission);
-            alertDialogBuilder.setMessage(R.string.text_location_permission);
-            alertDialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    //Prompt the user once explanation has been shown
-                    ActivityCompat.requestPermissions(AddAddressActivity.this,
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            99);
-                }
-            });
-            alertDialogBuilder.show();
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps();
+
         }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -493,7 +501,62 @@ public class AddAddressActivity extends AppCompatActivity implements IServiceLis
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
+//        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
+        progressDialogHelper.showProgressDialog("Getting Location");
+        CancellationToken cancellationToken = new CancellationToken() {
+            @Override
+            public boolean isCancellationRequested() {
+                return false;
+            }
+
+            @NonNull
+            @NotNull
+            @Override
+            public CancellationToken onCanceledRequested(@NonNull @NotNull OnTokenCanceledListener onTokenCanceledListener) {
+                return null;
+            }
+        };
+        fusedLocationClient.getCurrentLocation(100, cancellationToken)
+                .addOnCompleteListener(new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        progressDialogHelper.cancelProgressDialog();
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            Location location;
+                            location = task.getResult();
+                            lat = "" + location.getLatitude();
+                            lng = "" + location.getLongitude();
+
+                            PreferenceStorage.saveLat(getApplicationContext(), lat);
+                            PreferenceStorage.saveLng(getApplicationContext(), lng);
+
+                            geocoder = new Geocoder(AddAddressActivity.this, Locale.getDefault());
+                            try {
+                                addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 2);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            String add1 = addressList.get(0).getAddressLine(0);
+                            address1.setEnabled(true);
+                            address1.setText(add1);
+                            String add2 = addressList.get(1).getAddressLine(0);
+                            address2.setEnabled(true);
+                            address2.setText(add2);
+                            String city = addressList.get(0).getSubAdminArea();
+                            area.setEnabled(true);
+                            area.setText(city);
+                            String stateName = addressList.get(0).getAdminArea();
+                            state.setEnabled(true);
+                            state.setText(stateName);
+                            String postal = addressList.get(0).getPostalCode();
+                            pinCode.setEnabled(true);
+                            pinCode.setText(postal);
+                        } else {
+                            Log.w(TAG, "Failed to get location.");
+                        }
+                    }
+                });
+
     }
 
     private boolean checkPermissions() {
