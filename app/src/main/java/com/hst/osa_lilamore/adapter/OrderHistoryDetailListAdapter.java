@@ -61,7 +61,7 @@ public class OrderHistoryDetailListAdapter extends RecyclerView.Adapter<OrderHis
                 }
             });
             if (resFor) {
-                productReplace.setVisibility(View.GONE);
+                productReplace.setVisibility(View.VISIBLE);
             }
         }
 

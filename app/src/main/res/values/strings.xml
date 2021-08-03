@@ -23,6 +23,7 @@
     <string name="skip_login">Skip for now</string>
     <string name="skip">Skip</string>
     <string name="login_to_continue">Log in to continue</string>
+    <string name="camera_permission_denied">Location Permission Denied</string>
 
     <string name="wl_note">Welcome back, you’ve been missed!</string>
     <string name="mobile">Mobile Number</string>

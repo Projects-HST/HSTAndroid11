@@ -241,6 +241,7 @@ public class OrderHistoryDetailPage extends AppCompatActivity implements IServic
             try {
                 if (resCheck.equalsIgnoreCase("detail")) {
                     JSONArray orderObjData = response.getJSONArray("order_details");
+                    JSONArray orderOData = response.getJSONArray("cart_items");
 
                     JSONObject data = orderObjData.getJSONObject(0);
 
@@ -253,7 +254,7 @@ public class OrderHistoryDetailPage extends AppCompatActivity implements IServic
                     String streetString = data.getString("street");
                     String cityString = data.getString("city");
                     String pincodeString = data.getString("pincode");
-                    String orderStatus = data.getString("order_status");
+                    String orderStatus = orderOData.getJSONObject(0).getString("status");
 
                     String itemString = data.getString("total_amount");
                     String promoString = data.getString("promo_amount");
