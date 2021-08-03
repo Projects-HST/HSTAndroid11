@@ -23,20 +23,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/location"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
             android:background="@drawable/shadow_round"
-            app:drawableStartCompat="@drawable/ic_placeholder"
-            android:padding="20dp"
+            android:layout_margin="20dp"
             android:elevation="5dp"
-            android:text="@string/locate"
-            android:gravity="center"
-            android:textAllCaps="false"
-            android:textColor="@color/txt_red"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/locate"
+                android:textAllCaps="false"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/regular"
+                android:textColor="@color/txt_red"
+                android:textSize="16sp"
+                android:drawablePadding="10dp"
+                android:paddingVertical="20dp"
+                android:paddingHorizontal="20dp"
+                app:drawableStartCompat="@drawable/ic_placeholder" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -64,10 +75,9 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginBottom="10dp"
                     android:hint="@string/name"
-                    android:textSize="16sp"
                     app:boxStrokeColor="@color/lite_grey"
                     android:fontFamily="@font/regular"
-                    android:textColor="@color/text_black">
+                    android:textColorHint="@color/text_black">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txt_name"
@@ -78,6 +88,7 @@
                         android:fontFamily="@font/regular"
                         android:textColor="@color/text_black"
                         android:textSize="16sp" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +100,6 @@
                     android:layout_marginBottom="10dp"
                     android:hint="@string/mobile"
                     android:fontFamily="@font/regular"
-                    android:textColor="@color/text_black"
                     app:boxStrokeColor="@color/lite_grey"
                     app:hintTextColor="@color/text_black"
                     app:prefixText="+91">
@@ -100,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:maxLength="10"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/text_black"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +124,6 @@
                     android:layout_marginBottom="10dp"
                     android:hint="@string/address1"
                     android:fontFamily="@font/regular"
-                    android:textColor="@color/text_black"
                     app:boxStrokeColor="@color/lite_grey"
                     app:hintTextColor="@color/text_black">
 
@@ -138,7 +147,6 @@
                     android:layout_marginBottom="10dp"
                     android:hint="@string/address2"
                     android:fontFamily="@font/regular"
-                    android:textColor="@color/text_black"
                     app:boxStrokeColor="@color/lite_grey"
                     app:hintTextColor="@color/text_black">
 
@@ -167,7 +175,6 @@
                         android:layout_marginBottom="10dp"
                         android:hint="@string/stateName"
                         android:fontFamily="@font/regular"
-                        android:textColor="@color/text_black"
                         app:boxStrokeColor="@color/lite_grey"
                         app:hintTextColor="@color/text_black"
                         android:layout_weight="0.5">
@@ -193,7 +200,6 @@
                         android:layout_marginBottom="10dp"
                         android:hint="@string/cityName"
                         android:fontFamily="@font/regular"
-                        android:textColor="@color/text_black"
                         app:boxStrokeColor="@color/lite_grey"
                         app:hintTextColor="@color/text_black"
                         android:layout_weight="0.5">

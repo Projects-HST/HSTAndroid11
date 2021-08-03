@@ -41,7 +41,8 @@ import java.util.ArrayList;
 
 import static android.util.Log.d;
 
-public class SubCategoryActivity extends AppCompatActivity implements IServiceListener, SubCategoryListAdapter.OnItemClickListener, DialogClickListener, BestSellingListAdapter.OnItemClickListener, RecentSearchListAdapter.OnItemClickListener {
+public class SubCategoryActivity extends AppCompatActivity implements IServiceListener, SubCategoryListAdapter.OnItemClickListener,
+        DialogClickListener, BestSellingListAdapter.OnItemClickListener, RecentSearchListAdapter.OnItemClickListener {
 
     private static final String TAG = com.hst.osa_lilamore.activity.MainActivity.class.getName();
     private ServiceHelper serviceHelper;
@@ -63,7 +64,7 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
 
     private SearchView mSearchView;
 
-    private String catId, subCatId, serviceCall;
+    private String catId, subCatId, serviceCall, wishId;
 
     private ImageView imgFilter;
 
@@ -81,6 +82,8 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
                 finish();
             }
         });
+
+//        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("wishMode"));
 
         recentSearchLay = (LinearLayout)findViewById(R.id.recentList);
         subCatLay = (LinearLayout)findViewById(R.id.subCatLay);
@@ -150,9 +153,16 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
                 startActivity(i);
             }
         });
-
         showSubCategory();
     }
+
+//    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//
+//            wishId = intent.getStringExtra("wishId");
+//        }
+//    };
 
     private void showSubCategory() {
 
@@ -210,7 +220,7 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
                     String id = "";
                     String txtSubCat = "";
                     subCategoryArrayList = new ArrayList<>();
-                    subCategoryArrayList.add(new SubCategory("", "ALL"));
+                    subCategoryArrayList.add(new SubCategory("", "All"));
 
                     for (int i = 0; i < subCategoryArray.length(); i++) {
                         id = subCategoryArray.getJSONObject(i).getString("id");
@@ -240,6 +250,7 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
                     });
                     recyclerViewPopularProduct.setLayoutManager(mLayoutManager);
                     recyclerViewPopularProduct.setAdapter(adasd);
+//                    adasd.notifyDataSetChanged();
                 }
                 if(serviceCall.equalsIgnoreCase("search")){
                     Gson gson = new Gson();
@@ -342,13 +353,18 @@ public class SubCategoryActivity extends AppCompatActivity implements IServiceLi
         serviceHelper.makeGetServiceCall(jsonObject.toString(), url);
     }
 
+    public void reLoadPage() {
+        finish();
+        startActivity(getIntent());
+    }
+
     @Override
     public void onItemClickBestSelling(View view, int position) {
 
         Product product = null;
         product = productArrayList.get(position);
         Intent detailInt = new Intent(this, com.hst.osa_lilamore.activity.ProductDetailActivity.class);
-        detailInt.putExtra("page", "subcat");
+        detailInt.putExtra("page", "product");
         detailInt.putExtra("productObj", product.getid());
         startActivity(detailInt);
     }

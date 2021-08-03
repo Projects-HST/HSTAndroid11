@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
             android:id="@+id/adv_pay_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/activity_toolbar"
             android:layout_margin="40dp"
             android:visibility="gone"
             android:background="@drawable/shadow_round"
@@ -83,7 +84,7 @@
             android:id="@+id/wallet_pay_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/activity_toolbar"
             android:layout_margin="40dp"
             android:visibility="gone"
             android:background="@drawable/shadow_round"
@@ -146,7 +147,7 @@
             android:id="@+id/serv_pay_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/activity_toolbar"
             android:visibility="gone"
             android:layout_margin="20dp"
             android:background="@drawable/shadow_round"

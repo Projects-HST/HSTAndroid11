@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_grey"
+    android:background="@color/appBackground"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/review_layout"
-        android:background="@color/background_grey"
+        android:background="@color/appBackground"
         android:layout_below="@+id/activity_toolbar">
 
         <LinearLayout
@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/your_delivery"
                 android:fontFamily="@font/bold"
@@ -50,7 +50,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:fontFamily="@font/regular"
                     android:textColor="@color/text_black"
                     android:textSize="14sp" />
@@ -59,7 +60,8 @@
                     android:id="@+id/mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:fontFamily="@font/regular"
                     android:textColor="@color/text_black"
                     android:textSize="14sp" />
@@ -68,8 +70,8 @@
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:fontFamily="@font/light"
                     android:textColor="@color/text_black"
                     android:textSize="14sp" />
@@ -101,7 +103,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:drawableStart="@drawable/ic_coupon"
                     android:drawablePadding="10dp"
@@ -114,9 +116,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/btn_round_light_broder"
                     android:orientation="horizontal">
@@ -195,7 +197,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/payment_method"
                     android:fontFamily="@font/bold"
@@ -205,13 +207,12 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
                     android:background="@color/white">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="20dp"
                         android:drawablePadding="20dp"
                         android:fontFamily="@font/regular"
                         android:text="@string/avenue"
@@ -226,7 +227,8 @@
                         android:layout_height="40dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:padding="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingVertical="10dp"
                         android:src="@drawable/ic_check_mark_unchecked" />
 
 
@@ -235,14 +237,13 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
                     android:background="@color/white">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="20dp"
                         android:drawablePadding="25dp"
                         android:fontFamily="@font/regular"
                         android:text="@string/wallet"
@@ -256,7 +257,8 @@
                         android:layout_height="40dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:padding="10dp"
+                        android:paddingVertical="10dp"
+                        android:paddingStart="10dp"
                         android:src="@drawable/ic_check_mark_unchecked" />
 
 
@@ -264,13 +266,13 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="10dp"
                         android:layout_marginEnd="20dp"
                         android:drawablePadding="15dp"
                         android:fontFamily="@font/regular"
@@ -285,7 +287,8 @@
                         android:layout_height="40dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:padding="10dp"
+                        android:paddingVertical="10dp"
+                        android:paddingStart="10dp"
                         android:src="@drawable/ic_check_mark_unchecked" />
 
 
@@ -774,6 +777,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:elevation="10dp"
+        android:padding="5dp"
         android:background="@drawable/top_corners_round_bg_white">
 
         <TextView

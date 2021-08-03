@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/original_layout"
-    android:background="@color/background_grey"
+    android:background="@color/appBackground"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/order_played_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        
         android:visibility="gone"
+        android:elevation="24dp"
         android:background="@color/foreground_grey">
 
         <LinearLayout
@@ -84,7 +84,6 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
 
     <androidx.appcompat.widget.Toolbar
@@ -101,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/review_layout"
-        android:background="@color/background_grey"
+        android:background="@color/appBackground"
         android:layout_below="@id/activity_toolbar">
 
         <LinearLayout
@@ -115,14 +114,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                
                 android:background="@drawable/btn_square"
                 android:padding="1dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:fontFamily="@font/semibold"
                 android:layout_marginTop="10dp"
                 android:text="@string/your_delivery"
@@ -142,7 +140,8 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:fontFamily="@font/regular"
                     android:textColor="@color/text_black"
                     android:textSize="14sp" />
@@ -151,7 +150,8 @@
                     android:id="@+id/mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:fontFamily="@font/regular"
                     android:textColor="@color/text_black"
                     android:textSize="14sp"/>
@@ -160,8 +160,8 @@
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:fontFamily="@font/light"
                     android:textColor="@color/text_black"
                     android:textSize="14sp" />
@@ -203,7 +203,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/semibold"
                 android:text="@string/payment_method"
@@ -215,7 +215,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                
                 android:background="@drawable/btn_square"
                 android:orientation="vertical"
                 android:paddingTop="10dp"
@@ -225,7 +224,7 @@
                     android:id="@+id/payment_method"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginHorizontal="20dp"
                     android:fontFamily="@font/regular"
                     android:textColor="@color/black" />
 
@@ -241,6 +240,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:elevation="10dp"
         android:background="@drawable/top_corners_round_bg_white">
 
         <TextView

@@ -167,6 +167,10 @@ public class BestSellingFragment extends Fragment implements IServiceListener, D
 
     }
 
+//    public void reLoadPage() {
+//        startActivity();
+//    }
+
     @Override
     public void onAlertPositiveClicked(int tag) {
 

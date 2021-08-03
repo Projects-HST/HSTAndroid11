@@ -26,6 +26,8 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 public class OrderHistoryListAdapter extends RecyclerView.Adapter<OrderHistoryListAdapter.MyViewHolder> {
@@ -71,6 +73,7 @@ public class OrderHistoryListAdapter extends RecyclerView.Adapter<OrderHistoryLi
     }
 
     public OrderHistoryListAdapter(Context context, ArrayList<OrderHistory> orderHistoryArrayList, OnItemClickListener onItemClickListener) {
+        Collections.reverse(orderHistoryArrayList);
         this.mContext = context;
         this.orderHistoryArrayList = orderHistoryArrayList;
         this.onItemClickListener = onItemClickListener;

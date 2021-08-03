@@ -25,7 +25,7 @@
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/background_grey">
+            android:background="@color/appBackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recentSearchMain"
@@ -70,8 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/activity_toolbar"
-            android:background="@color/background_grey"
-            android:visibility="visible"/>
+            android:background="@color/appBackground"
+            android:visibility="visible" />
 
     </LinearLayout>
 

@@ -25,13 +25,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/btnLay"
-            android:background="@color/transparent">
+            android:background="@color/appBackground">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/addList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"></androidx.recyclerview.widget.RecyclerView>
+                android:background="@color/transparent">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </RelativeLayout>
 
@@ -40,30 +42,36 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/transparent"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:elevation="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <TextView
                 android:id="@+id/btnAdd"
                 android:layout_width="160dp"
                 android:layout_height="40dp"
-                android:background="@drawable/btn_size_color"
+                android:background="@drawable/btn_add_colour"
                 android:fontFamily="@font/medium"
+                android:gravity="center"
                 android:text="@string/new_add"
                 android:textAllCaps="false"
+                android:textSize="14sp"
                 android:textColor="@color/black" />
 
-            <Button
+            <TextView
                 android:id="@+id/cont"
                 android:layout_width="160dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:background="@drawable/btn_size_color"
                 android:fontFamily="@font/medium"
+                android:gravity="center"
                 android:text="@string/signIn"
                 android:textAllCaps="false"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
 
         </LinearLayout>
 

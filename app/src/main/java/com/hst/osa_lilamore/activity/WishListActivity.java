@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.hst.osa_lilamore.R;
 import com.hst.osa_lilamore.adapter.BestSellingListAdapter;
 import com.hst.osa_lilamore.adapter.RecentSearchListAdapter;
+import com.hst.osa_lilamore.adapter.WishlistAdapter;
 import com.hst.osa_lilamore.bean.support.Product;
 import com.hst.osa_lilamore.bean.support.RecentSearch;
 import com.hst.osa_lilamore.bean.support.RecentSearchList;
@@ -41,7 +42,8 @@ import java.util.ArrayList;
 
 import static android.util.Log.d;
 
-public class WishListActivity extends AppCompatActivity implements IServiceListener, DialogClickListener, BestSellingListAdapter.OnItemClickListener, RecentSearchListAdapter.OnItemClickListener {
+public class WishListActivity extends AppCompatActivity implements IServiceListener, DialogClickListener,
+        WishlistAdapter.OnItemClickListener, RecentSearchListAdapter.OnItemClickListener {
 
     public static final String TAG = WishListActivity.class.getName();
 
@@ -235,7 +237,7 @@ public class WishListActivity extends AppCompatActivity implements IServiceListe
                     Gson gson = new Gson();
                     productList = gson.fromJson(response.toString(), SubProductList.class);
                     productArrayList.addAll(productList.getProductArrayList());
-                    BestSellingListAdapter adasd = new BestSellingListAdapter(this, productArrayList, this);
+                    WishlistAdapter adasd = new WishlistAdapter(this, productArrayList, this);
                     GridLayoutManager mLayoutManager = new GridLayoutManager(this, 4);
                     mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                         @Override

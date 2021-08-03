@@ -245,10 +245,10 @@ public class CheckoutActivity extends AppCompatActivity implements IServiceListe
                     JSONArray categoryObjData = response.getJSONArray("address_list");
                     addressList = gson.fromJson(response.toString(), AddressArrayList.class);
                     addressArrayList.addAll(addressList.getAddressArrayList());
-                    addressID = addressArrayList.get(0).getId();
-//                for (int i = 0; i < addressArrayList.size(); i++) {
-//                    if (addressArrayList.get(i).get)
-//                }
+//                    addressID = addressArrayList.get(0).getId();
+                    for (int i = 0; i < addressArrayList.size(); i++) {
+                        addressID = addressArrayList.get(i).getId();
+                    }
                     placeOrder();
                 }
                 if (resCheck.equalsIgnoreCase("place")) {

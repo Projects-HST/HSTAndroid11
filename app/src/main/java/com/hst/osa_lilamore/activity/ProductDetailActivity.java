@@ -1,8 +1,10 @@
 package com.hst.osa_lilamore.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,7 +64,7 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
     Context context;
     private ServiceHelper serviceHelper;
     private ProgressDialogHelper progressDialogHelper;
-    private String productID, sizeID = "0", colourID = "0";
+    private String productID, sizeID = "0", colourID = "0", wishState;
     AViewFlipper aViewFlipper;
 
     private LinearLayout dotsLayout;
@@ -145,6 +148,8 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
             }
         });
 
+//        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("wishListed"));
+
         productReviewName = findViewById(R.id.product_name_review);
         rtbComments = findViewById(R.id.rating_bar);
         edtComments = findViewById(R.id.edtComments);
@@ -189,6 +194,15 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
         initiateServices();
         getDashboardServices();
     }
+
+//    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//
+//            wishState = intent.getStringExtra("wishState");
+//        }
+//    };
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -281,6 +295,15 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
                     offStatus = productDetails.getString("offer_status");
                     offPer = productDetails.getString("offer_percentage");
                     stockCount = Integer.parseInt(productDetails.getString("stocks_left"));
+                    wishState = productDetails.getString("wishlisted");
+                    if (wishState.equalsIgnoreCase("1")){
+//                        likeClick = true;
+                        imgLike.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_heart_filled));
+                    }
+                    else {
+//                        likeClick = false;
+                        imgLike.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_heart));
+                    }
                     if (stockCount == 0) {
                         productStockStatus.setText(getString(R.string.out_stock));
                         productStockStatus.setTextColor(ContextCompat.getColor(this, R.color.out_of_stock));
@@ -432,7 +455,7 @@ public class ProductDetailActivity extends AppCompatActivity implements IService
         resFor = "detail";
         JSONObject jsonObject = new JSONObject();
         try {
-//            jsonObject.put(SkilExConstants.USER_MASTER_ID, PreferenceStorage.getUserId(this));
+            jsonObject.put(OSAConstants.KEY_USER_ID, PreferenceStorage.getUserId(this));
             jsonObject.put(OSAConstants.PARAMS_PROD_ID, productID);
         } catch (JSONException e) {
             e.printStackTrace();

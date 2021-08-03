@@ -146,6 +146,9 @@ public class DashboardFragment extends Fragment implements IServiceListener, Dia
 //        loadMoreListView.setOnItemClickListener(this);
 //        PreferenceStorage.saveServiceCount(getActivity(), "");
 //        PreferenceStorage.saveRate(getActivity(), "");
+        advertisementArrayList.clear();
+        productArrayList.clear();
+        productArrayList1.clear();
         getDashboardServices();
 //        loadMob();
         return rootView;
@@ -224,12 +227,16 @@ public class DashboardFragment extends Fragment implements IServiceListener, Dia
 
                     JSONObject popularObjData = response.getJSONObject("popular_product_list");
                     productList = gson.fromJson(popularObjData.toString(), ProductList.class);
-                    for (int b = 0; b <=1; b++) {
-                        productArrayList.add(b, productList.getProductArrayList().get(b));
+                    if (productList.getProductArrayList() != null && productList.getProductArrayList().size() > 0) {
+                        for (int b = 0; b <= 1; b++) {
+                            productArrayList.add(b, productList.getProductArrayList().get(b));
+                        }
+                    }
+                    else {
+//                        AlertDialogHelper.showSimpleAlertDialog(rootView.getContext(), getString());
                     }
                     BestSellingListAdapter adasd = new BestSellingListAdapter(getActivity(),productArrayList, this);
                     LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-
                     recyclerViewPopularProduct.setLayoutManager(mLayoutManager);
                     recyclerViewPopularProduct.setAdapter(adasd);
 
@@ -238,7 +245,7 @@ public class DashboardFragment extends Fragment implements IServiceListener, Dia
                     for (int c = 0; c <=2; c++) {
                         productArrayList1.add(c, productList1.getProductArrayList().get(c));
                     }
-                    NewArrivalsListAdapter newArrivalsListAdapter = new NewArrivalsListAdapter(productArrayList1, this);
+                    NewArrivalsListAdapter newArrivalsListAdapter = new NewArrivalsListAdapter(getContext(), productArrayList1, this);
                     RecyclerView.LayoutManager mLayoutManagerNewArrivals = new LinearLayoutManager(getActivity());
                     recyclerViewNewArrivals.setLayoutManager(mLayoutManagerNewArrivals);
                     recyclerViewNewArrivals.setAdapter(newArrivalsListAdapter);

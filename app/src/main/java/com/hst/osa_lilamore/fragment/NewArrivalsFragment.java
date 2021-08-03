@@ -137,7 +137,7 @@ public class NewArrivalsFragment extends Fragment implements IServiceListener, D
                 JSONObject popularObjData = response.getJSONObject("new_product");
                 productList = gson.fromJson(popularObjData.toString(), ProductList.class);
                 productArrayList.addAll(productList.getProductArrayList());
-                NewArrivalsListAdapter newArrivalsListAdapter = new NewArrivalsListAdapter(productArrayList, this);
+                NewArrivalsListAdapter newArrivalsListAdapter = new NewArrivalsListAdapter(getContext(), productArrayList, this);
                 RecyclerView.LayoutManager mLayoutManagerNewArrivals = new LinearLayoutManager(getActivity());
                 recyclerViewNewArrivals.setLayoutManager(mLayoutManagerNewArrivals);
                 recyclerViewNewArrivals.setAdapter(newArrivalsListAdapter);
