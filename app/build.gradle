@@ -116,6 +116,7 @@ dependencies {
     implementation files('libs/universal-image-loader-1.9.3.jar')
     implementation files('libs/httpcore-4.3.3.jar')
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.intellij:annotations:+@jar'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
